@@ -10,15 +10,13 @@ namespace AssessementProjectForAddingUser.Domain.DTOs
 {
     public class UserDetailsAnkitDtos
     {
-        public long UserId { get; set; }
-
-        [Required(ErrorMessage = "First name can't be empty")]
-        public string FirstName { get; set; } = null!;
+        //[Required(ErrorMessage = "First name can't be empty")]
+        public string FirstName { get; set; }
 
         public string? MiddleName { get; set; }
 
-        [Required(ErrorMessage = "Last name can't be empty")]
-        public string LastName { get; set; } = null!;
+        //[Required(ErrorMessage = "Last name can't be empty")]
+        public string LastName { get; set; }
 
         public byte? Gender { get; set; }
 
@@ -26,16 +24,16 @@ namespace AssessementProjectForAddingUser.Domain.DTOs
 
         public DateOnly? Dob { get; set; }
 
-        [Required(ErrorMessage = "Email can't be empty")]
-        [EmailAddress(ErrorMessage = "Enter valid email address")]
+        //[Required(ErrorMessage = "Email can't be empty")]
+        //[EmailAddress(ErrorMessage = "Enter valid email address")]
         public string Email { get; set; } = null!;
 
-        [Required(ErrorMessage = "Phone number is required")]
+        //[Required(ErrorMessage = "Phone number is required")]
         public string Phone { get; set; } = null!;
 
         public string? AlternatePhone { get; set; }
 
-        public string? ImagePath { get; set; }
+        //public string? ImagePath { get; set; }
 
         public string? Password { get; set; }
 

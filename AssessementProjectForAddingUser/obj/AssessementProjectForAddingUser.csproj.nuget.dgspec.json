@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ankit.baskandi\\source\\repos\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser.csproj": {}
+    "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ankit.baskandi\\source\\repos\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser.Application\\AssessementProjectForAddingUser.Application.csproj": {
+    "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser.Application\\AssessementProjectForAddingUser.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ankit.baskandi\\source\\repos\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser.Application\\AssessementProjectForAddingUser.Application.csproj",
+        "projectUniqueName": "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser.Application\\AssessementProjectForAddingUser.Application.csproj",
         "projectName": "AssessementProjectForAddingUser.Application",
-        "projectPath": "C:\\Users\\ankit.baskandi\\source\\repos\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser.Application\\AssessementProjectForAddingUser.Application.csproj",
-        "packagesPath": "C:\\Users\\ankit.baskandi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ankit.baskandi\\source\\repos\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser.Application\\obj\\",
+        "projectPath": "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser.Application\\AssessementProjectForAddingUser.Application.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ankit.baskandi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -33,8 +33,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\ankit.baskandi\\source\\repos\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser.Domain\\AssessementProjectForAddingUser.Domain.csproj": {
-                "projectPath": "C:\\Users\\ankit.baskandi\\source\\repos\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser.Domain\\AssessementProjectForAddingUser.Domain.csproj"
+              "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser.Domain\\AssessementProjectForAddingUser.Domain.csproj": {
+                "projectPath": "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser.Domain\\AssessementProjectForAddingUser.Domain.csproj"
               }
             }
           }
@@ -69,24 +69,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ankit.baskandi\\source\\repos\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser.Domain\\AssessementProjectForAddingUser.Domain.csproj": {
+    "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser.Domain\\AssessementProjectForAddingUser.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ankit.baskandi\\source\\repos\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser.Domain\\AssessementProjectForAddingUser.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser.Domain\\AssessementProjectForAddingUser.Domain.csproj",
         "projectName": "AssessementProjectForAddingUser.Domain",
-        "projectPath": "C:\\Users\\ankit.baskandi\\source\\repos\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser.Domain\\AssessementProjectForAddingUser.Domain.csproj",
-        "packagesPath": "C:\\Users\\ankit.baskandi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ankit.baskandi\\source\\repos\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser.Domain\\obj\\",
+        "projectPath": "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser.Domain\\AssessementProjectForAddingUser.Domain.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ankit.baskandi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -156,24 +156,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ankit.baskandi\\source\\repos\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser.csproj": {
+    "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser.Infrastructure\\AssessementProjectForAddingUser.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ankit.baskandi\\source\\repos\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser.csproj",
-        "projectName": "AssessementProjectForAddingUser",
-        "projectPath": "C:\\Users\\ankit.baskandi\\source\\repos\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser.csproj",
-        "packagesPath": "C:\\Users\\ankit.baskandi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ankit.baskandi\\source\\repos\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser\\obj\\",
+        "projectUniqueName": "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser.Infrastructure\\AssessementProjectForAddingUser.Infrastructure.csproj",
+        "projectName": "AssessementProjectForAddingUser.Infrastructure",
+        "projectPath": "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser.Infrastructure\\AssessementProjectForAddingUser.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ankit.baskandi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -189,11 +189,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\ankit.baskandi\\source\\repos\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser.Application\\AssessementProjectForAddingUser.Application.csproj": {
-                "projectPath": "C:\\Users\\ankit.baskandi\\source\\repos\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser.Application\\AssessementProjectForAddingUser.Application.csproj"
-              },
-              "C:\\Users\\ankit.baskandi\\source\\repos\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser.Domain\\AssessementProjectForAddingUser.Domain.csproj": {
-                "projectPath": "C:\\Users\\ankit.baskandi\\source\\repos\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser.Domain\\AssessementProjectForAddingUser.Domain.csproj"
+              "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser.Application\\AssessementProjectForAddingUser.Application.csproj": {
+                "projectPath": "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser.Application\\AssessementProjectForAddingUser.Application.csproj"
               }
             }
           }
@@ -213,6 +210,119 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Mapster": {
+              "target": "Package",
+              "version": "[7.4.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[8.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.7, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser.csproj",
+        "projectName": "AssessementProjectForAddingUser",
+        "projectPath": "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser\\AssessementProjectForAddingUser.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser.Application\\AssessementProjectForAddingUser.Application.csproj": {
+                "projectPath": "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser.Application\\AssessementProjectForAddingUser.Application.csproj"
+              },
+              "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser.Domain\\AssessementProjectForAddingUser.Domain.csproj": {
+                "projectPath": "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser.Domain\\AssessementProjectForAddingUser.Domain.csproj"
+              },
+              "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser.Infrastructure\\AssessementProjectForAddingUser.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\HP\\Desktop\\newAssessment\\newBackendAssessment\\AssessementProjectForAddingUser.Infrastructure\\AssessementProjectForAddingUser.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.7, )"
+            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -243,7 +353,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

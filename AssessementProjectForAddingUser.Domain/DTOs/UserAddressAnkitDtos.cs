@@ -21,7 +21,5 @@ namespace AssessementProjectForAddingUser.Domain.DTOs
         public string? ZipCode { get; set; }
 
         public long? Userid { get; set; }
-
-        public virtual UserDetailsAnkit? User { get; set; }
     }
 }

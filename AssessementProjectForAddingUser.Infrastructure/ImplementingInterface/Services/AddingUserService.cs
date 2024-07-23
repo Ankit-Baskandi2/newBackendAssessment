@@ -2,6 +2,7 @@
 using AssessementProjectForAddingUser.Application.Interface.IServices;
 using AssessementProjectForAddingUser.Domain.DTOs;
 using AssessementProjectForAddingUser.Domain.Entity;
+using AssessementProjectForAddingUser.Infrastructure.CustomLogic;
 using Mapster;
 using System;
 using System.Collections.Generic;
@@ -14,28 +15,36 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
     public class AddingUserService : IAddingUserService
     {
         private readonly IAddingUserDetailRepository _repository;
+        private readonly IEmailSenderService _emailSenderService;
 
-        public AddingUserService(IAddingUserDetailRepository addingUserDetail)
+        public AddingUserService(IAddingUserDetailRepository addingUserDetail, IEmailSenderService emailSenderService)
         {
-            _repository = addingUserDetail; 
+            _repository = addingUserDetail;
+            _emailSenderService = emailSenderService;
         }
 
         public async Task<string> AddingUserInDb(UserDetailsAnkitDtos userDetailsAnkitDtos)
         {
+            var message = "Use this email and passwod to login";
+            var uniquePassword = GeneratePassword.GenerateUniquePassword();
+            var credientailDetails = $"Email : {userDetailsAnkitDtos.Email}, Password :{uniquePassword}";
+            _emailSenderService.SendEmailAsync(userDetailsAnkitDtos.Email, message, credientailDetails);
+
+
             var convertedfile = new UserDetailsAnkit
             {
                 FirstName = userDetailsAnkitDtos.FirstName,
                 MiddleName = userDetailsAnkitDtos.MiddleName,
                 LastName = userDetailsAnkitDtos.LastName,
-                Email = userDetailsAnkitDtos.Email,
+                Email = EncriptionAndDecription.EncryptData(userDetailsAnkitDtos.Email),
                 Gender = userDetailsAnkitDtos.Gender,
                 DateOfjoining = userDetailsAnkitDtos.DateOfjoining,
                 Dob = userDetailsAnkitDtos.Dob,
-                Phone = userDetailsAnkitDtos.Phone,
-                AlternatePhone = userDetailsAnkitDtos.AlternatePhone,
+                Phone = EncriptionAndDecription.EncryptData(userDetailsAnkitDtos.Phone),
+                AlternatePhone = EncriptionAndDecription.EncryptData(userDetailsAnkitDtos.AlternatePhone),
                 IsActive = userDetailsAnkitDtos.IsActive,
                 ImagePath = "/book/Users",
-                Password = userDetailsAnkitDtos.Password,
+                Password = EncriptionAndDecription.EncryptData(uniquePassword),
                 UserAddressAnkits = userDetailsAnkitDtos.UserAddressAnkits.Select(a => new UserAddressAnkit
                 {
                     City = a.City,
@@ -45,7 +54,7 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
                     AddressId = a.AddressId,
                 }).ToList()
             };
-            //var convertingToModal = userDetailsAnkitDtos.Adapt<UserDetailsAnkit>();
+ 
             return await _repository.AddingUserInDb(convertedfile);
         }
     }
