@@ -66,9 +66,16 @@ namespace AssessementProjectForAddingUser.Controllers
         }
 
         [HttpDelete]
-        public async Task<bool> DeleteUserDetails(int Id)
+        public async Task<IActionResult> DeleteUserDetails(int Id)
         {
-            return await _addingUserService.DeleteUserDetail(Id);
+            return Ok(await _addingUserService.DeleteUserDetail(Id));
         }
+
+        [HttpGet("SendEmailToForgotPassword")]
+        public async Task<IActionResult> SendingEmail(string email)
+        {
+            return Ok(await _addingUserService.SendEmailToForgotPassword(email));
+        }
+
     }
 }

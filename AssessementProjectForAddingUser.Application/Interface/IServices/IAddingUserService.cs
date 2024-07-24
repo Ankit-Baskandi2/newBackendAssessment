@@ -13,6 +13,7 @@ namespace AssessementProjectForAddingUser.Application.Interface.IServices
         Task<string> AddingUserInDb(UserDetailsAnkitDtos userDetailsAnkitDtos);
         Task<bool> LoginCredentialChecking(LoginCredentialDto loginCredential);
         Task<IEnumerable<UserDetailsAnkit>> GetAllUsers();
-        Task<bool> DeleteUserDetail(int Id);
+        Task<string> DeleteUserDetail(int Id);
+        Task<string> SendEmailToForgotPassword(string email);
     }
 }

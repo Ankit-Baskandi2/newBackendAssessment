@@ -13,6 +13,6 @@ namespace AssessementProjectForAddingUser.Application.Interface.IRepositorys
         Task<string> AddingUserInDb(UserDetailsAnkit userAddress);
         Task<bool> LoginCredentialChecking(LoginCredentials loginCredential);
         Task<IEnumerable<UserDetailsAnkit>> GetAllUsers();
-        Task<bool> DeleteUserDetail(int Id);
+        Task<string> DeleteUserDetail(int Id);
     }
 }

@@ -52,9 +52,11 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
                     Country = a.Country,
                     ZipCode = a.ZipCode,
                     AddressId = a.AddressId,
+                    CreatedDate = a.CreatedDate,
+                    UpdateDate = a.UpdateDate,
                 }).ToList()
             };
- 
+
             return await _repository.AddingUserInDb(convertedfile);
         }
 
@@ -68,16 +70,34 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
         {
             var transformingData = new LoginCredentials()
             {
-                Email = EncriptionAndDecription.DecryptData(loginCredentialDto.Email),
-                Password = EncriptionAndDecription.DecryptData(loginCredentialDto.Password),
+                Email = EncriptionAndDecription.EncryptData(loginCredentialDto.Email),
+                Password = EncriptionAndDecription.EncryptData(loginCredentialDto.Password),
             };
 
             return await _repository.LoginCredentialChecking(transformingData);
         }
 
-        public async Task<bool> DeleteUserDetail(int Id)
+        public async Task<string> DeleteUserDetail(int Id)
         {
             return await _repository.DeleteUserDetail(Id);
+        }
+
+        public async Task<string> SendEmailToForgotPassword(string email)
+        {
+            try
+            {
+                var subj = "Click Link Below to Change Password";
+                var body = "";
+                await _emailSenderService.SendEmailAsync(email, subj, body);
+                return "Email sent successfully";
+            }
+            catch (Exception ex)
+            {
+                {
+                    return "Email sent unsuccessful!!";
+                }
+
+            }
         }
     }
 }

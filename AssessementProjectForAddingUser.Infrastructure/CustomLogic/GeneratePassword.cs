@@ -9,22 +9,22 @@ namespace AssessementProjectForAddingUser.Infrastructure.CustomLogic
 {
     public static class GeneratePassword
     {
-        private const string ValidCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+        private const string CharPool = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@#$%";
 
-        public static string GenerateUniquePassword(int length = 12)
+        public static string GenerateUniquePassword(int length=9)
         {
-            if (length <= 0)
-            {
-                throw new ArgumentException("Password length must be greater than zero.", nameof(length));
-            }
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+            StringBuilder pass = new StringBuilder();
 
-            using (var rng = new RNGCryptoServiceProvider())
+            for (int i = 0; i < length; i++)
             {
-                var byteArray = new byte[length];
-                rng.GetBytes(byteArray);
+                byte[] randomNumber = new byte[1];
+                rng.GetBytes(randomNumber);
 
-                return new string(byteArray.Select(b => ValidCharacters[b % ValidCharacters.Length]).ToArray());
+                int index = randomNumber[0] % CharPool.Length;
+                pass.Append(CharPool[index]);
             }
+            return pass.ToString();
         }
     }
 }

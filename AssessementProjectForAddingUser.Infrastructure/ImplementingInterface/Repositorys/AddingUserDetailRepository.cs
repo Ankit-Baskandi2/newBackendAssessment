@@ -11,6 +11,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 
 namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.Repositorys
 {
@@ -30,15 +31,26 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
             return "Data Successfully";
         }
 
-        public async Task<bool> DeleteUserDetail(int Id)
+        public async Task<string> DeleteUserDetail(int Id)
         {
-            
-            var result = _context.UserDetailsAnkits.FromSqlRaw($"EXEC UP_InActivateUser {Id}");
-            return true;
+            var messageParameter = new SqlParameter
+            {
+                ParameterName = "@message",
+                SqlDbType = System.Data.SqlDbType.VarChar,
+                Direction = System.Data.ParameterDirection.Output,
+                Size = 30
+            };
+
+            var parameter = new SqlParameter("@Id", Id);
+
+            await _context.Database.ExecuteSqlRawAsync("EXEC UP_InActivateUser @Id, @message OUTPUT", parameter, messageParameter);
+
+            var message = messageParameter.Value.ToString();
+            return message;
         }
 
         public async Task<IEnumerable<UserDetailsAnkit>> GetAllUsers()
-        {   ////new line
+        {   
             var collection = _context.UserDetailsAnkits.Include(o => o.UserAddressAnkits).Select(o => new UserDetailsAnkit
             {
                 UserId = o.UserId,
@@ -71,6 +83,5 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
             bool exists = await _context.UserDetailsAnkits.AnyAsync(u => u.Email == loginCredential.Email && u.Password == loginCredential.Password && u.IsActive == true);
             return exists;
         }
-
     }
 }
