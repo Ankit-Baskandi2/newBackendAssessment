@@ -38,7 +38,7 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
         }
 
         public async Task<IEnumerable<UserDetailsAnkit>> GetAllUsers()
-        {
+        {   ////new line
             var collection = _context.UserDetailsAnkits.Include(o => o.UserAddressAnkits).Select(o => new UserDetailsAnkit
             {
                 UserId = o.UserId,
