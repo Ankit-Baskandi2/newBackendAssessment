@@ -57,5 +57,27 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
  
             return await _repository.AddingUserInDb(convertedfile);
         }
+
+
+        public async Task<IEnumerable<UserDetailsAnkit>> GetAllUsers()
+        {
+            return await _repository.GetAllUsers();
+        }
+
+        public async Task<bool> LoginCredentialChecking(LoginCredentialDto loginCredentialDto)
+        {
+            var transformingData = new LoginCredentials()
+            {
+                Email = EncriptionAndDecription.DecryptData(loginCredentialDto.Email),
+                Password = EncriptionAndDecription.DecryptData(loginCredentialDto.Password),
+            };
+
+            return await _repository.LoginCredentialChecking(transformingData);
+        }
+
+        public async Task<bool> DeleteUserDetail(int Id)
+        {
+            return await _repository.DeleteUserDetail(Id);
+        }
     }
 }

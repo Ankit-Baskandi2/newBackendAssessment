@@ -21,6 +21,10 @@ namespace AssessementProjectForAddingUser.Domain.Entity
 
         public long? Userid { get; set; }
 
+        public DateOnly? CreatedDate { get; set; }
+
+        public DateOnly? UpdateDate { get; set; }
+
         public virtual UserDetailsAnkit? User { get; set; }
     }
 }

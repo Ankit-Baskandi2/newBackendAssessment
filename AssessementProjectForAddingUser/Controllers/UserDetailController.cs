@@ -12,10 +12,12 @@ namespace AssessementProjectForAddingUser.Controllers
     public class UserDetailController : ControllerBase
     {
         private readonly IAddingUserService _addingUserService;
+        private readonly IConfiguration _config;
 
-        public UserDetailController(IAddingUserService addingUserService)
+        public UserDetailController(IAddingUserService addingUserService, IConfiguration config)
         {
             _addingUserService = addingUserService;
+            _config = config;
         }
 
         [HttpPost]
@@ -42,5 +44,31 @@ namespace AssessementProjectForAddingUser.Controllers
         //    }
         //    return BadRequest(new ResponseModal { StatusCode = StaticData.errorStatusCode, Message = StaticData.errorMessage, Data = StaticData.data });
         //}
+
+        [HttpPost("UserLoginChecking")]
+        [AllowAnonymous]
+        public async Task<IActionResult> UserLogin([FromBody] LoginCredentialDto loginCredential)
+        {
+            var result = await _addingUserService.LoginCredentialChecking(loginCredential);
+            if(result == true)
+            {
+                TokenGenerationService tokenGeneration = new TokenGenerationService(_config);
+                var token = tokenGeneration.GenerateToken(loginCredential);
+                return Ok(token);
+            }
+            return BadRequest("Incorrect email/password");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllUserDetails()
+        {
+            return Ok(await _addingUserService.GetAllUsers());
+        }
+
+        [HttpDelete]
+        public async Task<bool> DeleteUserDetails(int Id)
+        {
+            return await _addingUserService.DeleteUserDetail(Id);
+        }
     }
 }

@@ -11,5 +11,8 @@ namespace AssessementProjectForAddingUser.Application.Interface.IRepositorys
     public interface IAddingUserDetailRepository
     {
         Task<string> AddingUserInDb(UserDetailsAnkit userAddress);
+        Task<bool> LoginCredentialChecking(LoginCredentials loginCredential);
+        Task<IEnumerable<UserDetailsAnkit>> GetAllUsers();
+        Task<bool> DeleteUserDetail(int Id);
     }
 }

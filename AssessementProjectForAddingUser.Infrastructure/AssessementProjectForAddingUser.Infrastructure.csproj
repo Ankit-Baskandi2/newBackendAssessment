@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AssessementProjectForAddingUser.Application\AssessementProjectForAddingUser.Application.csproj" />
+    <ProjectReference Include="..\AssessementProjectForAddingUser.Domain\AssessementProjectForAddingUser.Domain.csproj" />
   </ItemGroup>
 
 </Project>
