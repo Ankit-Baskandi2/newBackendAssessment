@@ -3,12 +3,6 @@ using AssessementProjectForAddingUser.Application.Interface.IServices;
 using AssessementProjectForAddingUser.Domain.DTOs;
 using AssessementProjectForAddingUser.Domain.Entity;
 using AssessementProjectForAddingUser.Infrastructure.CustomLogic;
-using Mapster;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.Services
 {
@@ -23,7 +17,7 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
             _emailSenderService = emailSenderService;
         }
 
-        public async Task<string> AddingUserInDb(UserDetailsAnkitDtos userDetailsAnkitDtos)
+        public async Task<ResponseDto> AddingUserInDb(UserDetailsAnkitDtos userDetailsAnkitDtos)
         {
             var message = "Use this email and passwod to login";
             var uniquePassword = GeneratePassword.GenerateUniquePassword();
@@ -61,7 +55,7 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
         }
 
 
-        public async Task<IEnumerable<UserDetailsAnkit>> GetAllUsers()
+        public async Task<ResponseDto> GetAllUsers()
         {
             return await _repository.GetAllUsers();
         }
@@ -77,7 +71,7 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
             return await _repository.LoginCredentialChecking(transformingData);
         }
 
-        public async Task<string> DeleteUserDetail(int Id)
+        public async Task<ResponseDto> DeleteUserDetail(int Id)
         {
             return await _repository.DeleteUserDetail(Id);
         }
@@ -90,6 +84,9 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
                 var isPresent = await _repository.EmailIsPresentOrNot(encrypt);
                 if (isPresent)
                 {
+                    //var tokenBytes = RandomNumberGenerator.GetBytes(64);
+                    //var emailToken = Convert.ToBase64String(tokenBytes);
+            
                     var subj = "Click link below to change password";
                     var body = "http://localhost:4200/auth/resetoldpassword";
                     await _emailSenderService.SendEmailAsync(email, subj, body);
@@ -104,9 +101,9 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
             }
         }
 
-        //public Task<string> UpdateUserDetail(LoginCredentialDto loginCredential)
-        //{
-           
-        //}
+        public async Task<ResponseDto> UpdateUserDetail(UserDetailsAnkitDtos detailsAnkitDtos)
+        {
+            return await _repository.UpdateUserDetail(detailsAnkitDtos);
+        }
     }
 }

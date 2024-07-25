@@ -2,7 +2,6 @@
 using AssessementProjectForAddingUser.Domain.DTOs;
 using AssessementProjectForAddingUser.Infrastructure.CustomLogic;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AssessementProjectForAddingUser.Controllers
@@ -20,8 +19,8 @@ namespace AssessementProjectForAddingUser.Controllers
             _config = config;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> SaveEmployee([FromBody] UserDetailsAnkitDtos userDetailsAnkitDtos)
+        [HttpPost("SaveUserDetail")]
+        public async Task<IActionResult> SaveDetail([FromBody] UserDetailsAnkitDtos userDetailsAnkitDtos)
         {       
             return Ok(await _addingUserService.AddingUserInDb(userDetailsAnkitDtos));
         }
@@ -40,14 +39,14 @@ namespace AssessementProjectForAddingUser.Controllers
             return BadRequest(new ResponseDto { Data = null, Message = "Incorrect email/password", StatusCode=401});
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllUserDetails()
+        [HttpGet("GetUserDetails")]
+        public async Task<IActionResult> GetDetails()
         {
             return Ok(await _addingUserService.GetAllUsers());
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteUserDetails(int Id)
+        [HttpDelete("DeleteUserDetails")]
+        public async Task<IActionResult> DeleteDetails(int Id)
         {
             return Ok(await _addingUserService.DeleteUserDetail(Id));
         }
@@ -58,10 +57,16 @@ namespace AssessementProjectForAddingUser.Controllers
             return Ok(await _addingUserService.SendEmailToForgotPassword(email));
         }
 
-        [HttpPost("ChangePassword")]
-        public async Task<IActionResult> ChangePassword(string oldPassword, string newPassword)
+        //[HttpPost("ChangePassword")]
+        //public async Task<IActionResult> ChangePassword(string oldPassword, string newPassword)
+        //{
+
+        //}
+
+        [HttpPost("UpdateUserDetail")]
+        public async Task<IActionResult> UpdateDetails(UserDetailsAnkitDtos userDetails)
         {
-            
+            return Ok(await _addingUserService.UpdateUserDetail(userDetails));
         }
     }
 }
