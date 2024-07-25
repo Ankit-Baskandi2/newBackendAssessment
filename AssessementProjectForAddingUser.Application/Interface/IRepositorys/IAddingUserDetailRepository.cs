@@ -14,5 +14,8 @@ namespace AssessementProjectForAddingUser.Application.Interface.IRepositorys
         Task<bool> LoginCredentialChecking(LoginCredentials loginCredential);
         Task<IEnumerable<UserDetailsAnkit>> GetAllUsers();
         Task<string> DeleteUserDetail(int Id);
+        //Task<string> UpdateUserDetail(UserDetailsAnkit userDetailsAnkit);
+        Task<bool> EmailIsPresentOrNot(string email);
+        Task<ResponseDto> ChangePassword(string oldPassword,  string newPassword);
     }
 }

@@ -26,25 +26,6 @@ namespace AssessementProjectForAddingUser.Controllers
             return Ok(await _addingUserService.AddingUserInDb(userDetailsAnkitDtos));
         }
 
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[Route("UserValidation")]
-        //public async Task<IActionResult> UserValidation([FromBody] EmailAndPasswordModal emailAndPassword)
-        //{
-        //    if (!ModelState.IsValid)
-        //        BadRequest(new ResponseModal { StatusCode = StaticData.errorStatusCode, Message = StaticData.errorMessage, Data = StaticData.data });
-
-        //    var result = await _userSignUpService.ValidatingUserEmailAndPassword(emailAndPassword);
-
-        //    if (result == 1)
-        //    {
-        //        TokenGenerationService tokenGeneration = new TokenGenerationService(_config);
-        //        var token = tokenGeneration.GenerateToken(emailAndPassword);
-        //        return Ok(new ResponseModal { StatusCode = StaticData.statusCode, Message = StaticData.successMessage, Data = token });
-        //    }
-        //    return BadRequest(new ResponseModal { StatusCode = StaticData.errorStatusCode, Message = StaticData.errorMessage, Data = StaticData.data });
-        //}
-
         [HttpPost("UserLoginChecking")]
         [AllowAnonymous]
         public async Task<IActionResult> UserLogin([FromBody] LoginCredentialDto loginCredential)
@@ -54,9 +35,9 @@ namespace AssessementProjectForAddingUser.Controllers
             {
                 TokenGenerationService tokenGeneration = new TokenGenerationService(_config);
                 var token = tokenGeneration.GenerateToken(loginCredential);
-                return Ok(token);
+                return Ok(new ResponseDto { Data = token, Message = "Welcome back", StatusCode = 200 });
             }
-            return BadRequest("Incorrect email/password");
+            return BadRequest(new ResponseDto { Data = null, Message = "Incorrect email/password", StatusCode=401});
         }
 
         [HttpGet]
@@ -71,11 +52,16 @@ namespace AssessementProjectForAddingUser.Controllers
             return Ok(await _addingUserService.DeleteUserDetail(Id));
         }
 
-        [HttpGet("SendEmailToForgotPassword")]
+        [HttpPost("SendEmailToForgotPassword/{email}")]
         public async Task<IActionResult> SendingEmail(string email)
-        {
+        {  
             return Ok(await _addingUserService.SendEmailToForgotPassword(email));
         }
 
+        [HttpPost("ChangePassword")]
+        public async Task<IActionResult> ChangePassword(string oldPassword, string newPassword)
+        {
+            
+        }
     }
 }

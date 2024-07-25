@@ -14,6 +14,8 @@ namespace AssessementProjectForAddingUser.Application.Interface.IServices
         Task<bool> LoginCredentialChecking(LoginCredentialDto loginCredential);
         Task<IEnumerable<UserDetailsAnkit>> GetAllUsers();
         Task<string> DeleteUserDetail(int Id);
-        Task<string> SendEmailToForgotPassword(string email);
+        //Task<string> UpdateUserDetail(LoginCredentialDto loginCredential);
+        Task<ResponseDto> SendEmailToForgotPassword(string email);
+        
     }
 }

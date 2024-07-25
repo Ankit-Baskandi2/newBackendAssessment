@@ -49,6 +49,12 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
             return message;
         }
 
+        public async Task<bool> EmailIsPresentOrNot(string email)
+        {
+            bool isPresent = await _context.UserDetailsAnkits.AnyAsync(x => x.Email == email);
+            return isPresent;
+        }
+
         public async Task<IEnumerable<UserDetailsAnkit>> GetAllUsers()
         {   
             var collection = _context.UserDetailsAnkits.Include(o => o.UserAddressAnkits).Select(o => new UserDetailsAnkit
@@ -83,5 +89,22 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
             bool exists = await _context.UserDetailsAnkits.AnyAsync(u => u.Email == loginCredential.Email && u.Password == loginCredential.Password && u.IsActive == true);
             return exists;
         }
+
+        public Task<ResponseDto> ChangePassword(string oldPassword, string newPassword)
+        {
+            try
+            {
+                
+            }catch (Exception ex)
+            {
+
+            }
+        }
+
+
+        //public Task<string> UpdateUserDetail(UserDetailsAnkit userDetailsAnkit)
+        //{
+
+        //}
     }
 }

@@ -82,22 +82,31 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
             return await _repository.DeleteUserDetail(Id);
         }
 
-        public async Task<string> SendEmailToForgotPassword(string email)
+        public async Task<ResponseDto> SendEmailToForgotPassword(string email)
         {
             try
-            {
-                var subj = "Click Link Below to Change Password";
-                var body = "";
-                await _emailSenderService.SendEmailAsync(email, subj, body);
-                return "Email sent successfully";
+            {   
+                var encrypt = EncriptionAndDecription.EncryptData(email);
+                var isPresent = await _repository.EmailIsPresentOrNot(encrypt);
+                if (isPresent)
+                {
+                    var subj = "Click link below to change password";
+                    var body = "http://localhost:4200/auth/resetoldpassword";
+                    await _emailSenderService.SendEmailAsync(email, subj, body);
+                    return new ResponseDto { Data = null, Message = "Email sent successfully", StatusCode = 200 };
+                }
+                return new ResponseDto { Data = null, StatusCode = 401, Message = "You are not registered user" };
+
             }
             catch (Exception ex)
             {
-                {
-                    return "Email sent unsuccessful!!";
-                }
-
+                return new ResponseDto { Data = null, Message=ex.Message, StatusCode = 500 };
             }
         }
+
+        //public Task<string> UpdateUserDetail(LoginCredentialDto loginCredential)
+        //{
+           
+        //}
     }
 }
