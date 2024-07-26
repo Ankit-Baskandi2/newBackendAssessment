@@ -191,7 +191,6 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
             {
                 return new ResponseDto { Data = null, Message = ex.Message, StatusCode = 500 };
             }
-
         }
     }
 }
