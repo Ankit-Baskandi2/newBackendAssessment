@@ -1,4 +1,5 @@
 ﻿using AssessementProjectForAddingUser.Domain.Entity;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
 namespace AssessementProjectForAddingUser.Domain.DTOs
@@ -30,7 +31,7 @@ namespace AssessementProjectForAddingUser.Domain.DTOs
 
         public string? AlternatePhone { get; set; }
 
-        //public string? ImagePath { get; set; }
+        public IFormFile ImagePath { get; set; }
 
         public bool? IsActive { get; set; } = false;
 

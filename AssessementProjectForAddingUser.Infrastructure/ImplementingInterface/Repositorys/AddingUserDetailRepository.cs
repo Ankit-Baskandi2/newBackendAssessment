@@ -5,16 +5,19 @@ using AssessementProjectForAddingUser.Infrastructure.CustomLogic;
 using AssessementProjectForAddingUser.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Hosting;
 
 namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.Repositorys
 {
     public class AddingUserDetailRepository : IAddingUserDetailRepository
     {
         private readonly TestContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public AddingUserDetailRepository(TestContext context)
+        public AddingUserDetailRepository(TestContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public async Task<ResponseDto> AddingUserInDb(UserDetailsAnkit userAddress)
@@ -32,7 +35,7 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
 
         }
 
-        public async Task<ResponseDto> DeleteUserDetail(int Id)
+        public async Task<ResponseDto> DeleteUserDetail(long Id)
         {
             try
             {
@@ -89,7 +92,8 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
                     DateOfjoining = o.DateOfjoining,
                     Dob = o.Dob,
                     IsActive = o.IsActive,
-                    Password = EncriptionAndDecription.DecryptData(o.Password),
+                    ImagePath = o.ImagePath,
+                    //Password = EncriptionAndDecription.DecryptData(o.Password),
                     UserAddressAnkits = o.UserAddressAnkits.Select(a => new UserAddressAnkit
                     {
                         AddressId = a.AddressId,

@@ -8,7 +8,7 @@ namespace AssessementProjectForAddingUser.Application.Interface.IRepositorys
         Task<ResponseDto> AddingUserInDb(UserDetailsAnkit userAddress);
         Task<bool> LoginCredentialChecking(LoginCredentials loginCredential);
         Task<ResponseDto> GetAllUsers();
-        Task<ResponseDto> DeleteUserDetail(int Id);
+        Task<ResponseDto> DeleteUserDetail(long Id);
         Task<ResponseDto> UpdateUserDetail(UserDetailsAnkitDtos userDetailsAnkit);
         Task<bool> EmailIsPresentOrNot(string email);
         //Task<ResponseDto> ChangePassword(string oldPassword,  string newPassword);

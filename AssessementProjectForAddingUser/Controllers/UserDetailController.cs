@@ -4,6 +4,7 @@ using AssessementProjectForAddingUser.Infrastructure.CustomLogic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace AssessementProjectForAddingUser.Controllers
 {
     [Route("api/[controller]")]
@@ -20,7 +21,7 @@ namespace AssessementProjectForAddingUser.Controllers
         }
 
         [HttpPost("SaveUserDetail")]
-        public async Task<IActionResult> SaveDetail([FromBody] UserDetailsAnkitDtos userDetailsAnkitDtos)
+        public async Task<IActionResult> SaveDetail([FromForm] UserDetailsAnkitDtos userDetailsAnkitDtos)
         {       
             return Ok(await _addingUserService.AddingUserInDb(userDetailsAnkitDtos));
         }
@@ -46,7 +47,7 @@ namespace AssessementProjectForAddingUser.Controllers
         }
 
         [HttpDelete("DeleteUserDetails")]
-        public async Task<IActionResult> DeleteDetails(int Id)
+        public async Task<IActionResult> DeleteDetails(long Id)
         {
             return Ok(await _addingUserService.DeleteUserDetail(Id));
         }
@@ -64,7 +65,7 @@ namespace AssessementProjectForAddingUser.Controllers
         //}
 
         [HttpPost("UpdateUserDetail")]
-        public async Task<IActionResult> UpdateDetails(UserDetailsAnkitDtos userDetails)
+        public async Task<IActionResult> UpdateDetails([FromForm] UserDetailsAnkitDtos userDetails)
         {
             return Ok(await _addingUserService.UpdateUserDetail(userDetails));
         }

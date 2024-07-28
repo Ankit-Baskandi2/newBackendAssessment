@@ -1,11 +1,39 @@
 {
   "Version": 1,
-  "Hash": "wmzQgtmqLpQ3QRXQMZ9icHMpnMVcgMnYqhCdqzSIRPE=",
+  "Hash": "sSBwmmJqujQ6ClWGc2BjaAGgogJXfNNFPbPq2tTUUEo=",
   "Source": "AssessementProjectForAddingUser",
   "BasePath": "_content/AssessementProjectForAddingUser",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "AssessementProjectForAddingUser\\wwwroot",
+      "Source": "AssessementProjectForAddingUser",
+      "ContentRoot": "C:\\Users\\HP\\Desktop\\newBackendAssmetProject\\newBackendAssessment\\AssessementProjectForAddingUser\\wwwroot\\",
+      "BasePath": "_content/AssessementProjectForAddingUser",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\HP\\Desktop\\newBackendAssmetProject\\newBackendAssessment\\AssessementProjectForAddingUser\\wwwroot\\uploadImages\\eacbf29f-af21-47e7-a23e-a3185632b369_Icon2.png",
+      "SourceId": "AssessementProjectForAddingUser",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\HP\\Desktop\\newBackendAssmetProject\\newBackendAssessment\\AssessementProjectForAddingUser\\wwwroot\\",
+      "BasePath": "_content/AssessementProjectForAddingUser",
+      "RelativePath": "uploadImages/eacbf29f-af21-47e7-a23e-a3185632b369_Icon2.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploadImages\\eacbf29f-af21-47e7-a23e-a3185632b369_Icon2.png"
+    }
+  ]
 }

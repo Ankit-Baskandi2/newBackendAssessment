@@ -3,6 +3,7 @@ using AssessementProjectForAddingUser.Application.Interface.IServices;
 using AssessementProjectForAddingUser.Domain.DTOs;
 using AssessementProjectForAddingUser.Domain.Entity;
 using AssessementProjectForAddingUser.Infrastructure.CustomLogic;
+using Microsoft.AspNetCore.Hosting;
 
 namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.Services
 {
@@ -10,11 +11,14 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
     {
         private readonly IAddingUserDetailRepository _repository;
         private readonly IEmailSenderService _emailSenderService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public AddingUserService(IAddingUserDetailRepository addingUserDetail, IEmailSenderService emailSenderService)
+        public AddingUserService(IAddingUserDetailRepository addingUserDetail,
+            IEmailSenderService emailSenderService, IWebHostEnvironment webHostEnvironment)
         {
             _repository = addingUserDetail;
             _emailSenderService = emailSenderService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public async Task<ResponseDto> AddingUserInDb(UserDetailsAnkitDtos userDetailsAnkitDtos)
@@ -24,6 +28,25 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
             var credientailDetails = $"Email : {userDetailsAnkitDtos.Email}, Password :{uniquePassword}";
             _emailSenderService.SendEmailAsync(userDetailsAnkitDtos.Email, message, credientailDetails);
 
+            var uploadFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploadImages");
+
+            if (!Directory.Exists(uploadFolder))
+            {
+                Directory.CreateDirectory(uploadFolder);
+            }
+
+            string uniqueFileName = null;
+
+            if (userDetailsAnkitDtos.ImagePath != null)
+            {
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + userDetailsAnkitDtos.ImagePath.FileName;
+                var filePath = Path.Combine(uploadFolder, uniqueFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await userDetailsAnkitDtos.ImagePath.CopyToAsync(fileStream);
+                }
+            }
 
             var convertedfile = new UserDetailsAnkit
             {
@@ -37,7 +60,8 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
                 Phone = EncriptionAndDecription.EncryptData(userDetailsAnkitDtos.Phone),
                 AlternatePhone = EncriptionAndDecription.EncryptData(userDetailsAnkitDtos.AlternatePhone),
                 IsActive = userDetailsAnkitDtos.IsActive,
-                ImagePath = "/book/Users",
+                ImagePath = uniqueFileName != null ? "/uploads/" + uniqueFileName : null,
+                //ImagePath = "/null",
                 Password = EncriptionAndDecription.EncryptData(uniquePassword),
                 UserAddressAnkits = userDetailsAnkitDtos.UserAddressAnkits.Select(a => new UserAddressAnkit
                 {
@@ -71,7 +95,7 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
             return await _repository.LoginCredentialChecking(transformingData);
         }
 
-        public async Task<ResponseDto> DeleteUserDetail(int Id)
+        public async Task<ResponseDto> DeleteUserDetail(long Id)
         {
             return await _repository.DeleteUserDetail(Id);
         }

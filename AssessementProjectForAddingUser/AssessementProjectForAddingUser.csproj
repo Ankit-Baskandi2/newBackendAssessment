@@ -21,4 +21,8 @@
     <ProjectReference Include="..\AssessementProjectForAddingUser.Infrastructure\AssessementProjectForAddingUser.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\uploadImages\" />
+  </ItemGroup>
+
 </Project>

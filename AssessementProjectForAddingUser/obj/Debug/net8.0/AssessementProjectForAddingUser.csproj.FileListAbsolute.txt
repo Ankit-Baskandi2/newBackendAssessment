@@ -581,3 +581,4 @@ C:\Users\ankit.baskandi\Desktop\backendAssessmentProject\newBackendAssessment\As
 C:\Users\ankit.baskandi\Desktop\backendAssessmentProject\newBackendAssessment\AssessementProjectForAddingUser\obj\Debug\net8.0\AssessementProjectForAddingUser.pdb
 C:\Users\ankit.baskandi\Desktop\backendAssessmentProject\newBackendAssessment\AssessementProjectForAddingUser\obj\Debug\net8.0\AssessementProjectForAddingUser.genruntimeconfig.cache
 C:\Users\ankit.baskandi\Desktop\backendAssessmentProject\newBackendAssessment\AssessementProjectForAddingUser\obj\Debug\net8.0\ref\AssessementProjectForAddingUser.dll
+C:\Users\HP\Desktop\newBackendAssmetProject\newBackendAssessment\AssessementProjectForAddingUser\bin\Debug\net8.0\AssessementProjectForAddingUser.staticwebassets.runtime.json
