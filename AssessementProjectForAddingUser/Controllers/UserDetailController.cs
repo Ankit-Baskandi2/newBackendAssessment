@@ -21,7 +21,7 @@ namespace AssessementProjectForAddingUser.Controllers
         }
 
         [HttpPost("SaveUserDetail")]
-        public async Task<IActionResult> SaveDetail([FromForm] UserDetailsAnkitDtos userDetailsAnkitDtos)
+        public async Task<IActionResult> SaveDetail([FromBody] UserDetailsAnkitDtos userDetailsAnkitDtos)
         {       
             return Ok(await _addingUserService.AddingUserInDb(userDetailsAnkitDtos));
         }
@@ -30,14 +30,7 @@ namespace AssessementProjectForAddingUser.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> UserLogin([FromBody] LoginCredentialDto loginCredential)
         {
-            var result = await _addingUserService.LoginCredentialChecking(loginCredential);
-            if(result == true)
-            {
-                TokenGenerationService tokenGeneration = new TokenGenerationService(_config);
-                var token = tokenGeneration.GenerateToken(loginCredential);
-                return Ok(new ResponseDto { Data = token, Message = "Welcome back", StatusCode = 200 });
-            }
-            return BadRequest(new ResponseDto { Data = null, Message = "Incorrect email/password", StatusCode=401});
+            return Ok(await _addingUserService.LoginCredentialChecking(loginCredential));
         }
 
         [HttpGet("GetUserDetails")]

@@ -3,6 +3,7 @@ using AssessementProjectForAddingUser.Application.Interface.IServices;
 using AssessementProjectForAddingUser.Domain.DTOs;
 using AssessementProjectForAddingUser.Domain.Entity;
 using AssessementProjectForAddingUser.Infrastructure.CustomLogic;
+using Mapster;
 using Microsoft.AspNetCore.Hosting;
 
 namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.Services
@@ -12,13 +13,15 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
         private readonly IAddingUserDetailRepository _repository;
         private readonly IEmailSenderService _emailSenderService;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly TokenGenerationService _tokenGenerationService;
 
         public AddingUserService(IAddingUserDetailRepository addingUserDetail,
-            IEmailSenderService emailSenderService, IWebHostEnvironment webHostEnvironment)
+            IEmailSenderService emailSenderService, IWebHostEnvironment webHostEnvironment , TokenGenerationService tokenGenerationService)
         {
             _repository = addingUserDetail;
             _emailSenderService = emailSenderService;
             _webHostEnvironment = webHostEnvironment;
+            _tokenGenerationService = tokenGenerationService;
         }
 
         public async Task<ResponseDto> AddingUserInDb(UserDetailsAnkitDtos userDetailsAnkitDtos)
@@ -28,25 +31,25 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
             var credientailDetails = $"Email : {userDetailsAnkitDtos.Email}, Password :{uniquePassword}";
             _emailSenderService.SendEmailAsync(userDetailsAnkitDtos.Email, message, credientailDetails);
 
-            var uploadFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploadImages");
+            //var uploadFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploadImages");
 
-            if (!Directory.Exists(uploadFolder))
-            {
-                Directory.CreateDirectory(uploadFolder);
-            }
+            //if (!Directory.Exists(uploadFolder))
+            //{
+            //    Directory.CreateDirectory(uploadFolder);
+            //}
 
-            string uniqueFileName = null;
+            //string uniqueFileName = null;
 
-            if (userDetailsAnkitDtos.ImagePath != null)
-            {
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + userDetailsAnkitDtos.ImagePath.FileName;
-                var filePath = Path.Combine(uploadFolder, uniqueFileName);
+            //if (userDetailsAnkitDtos.ImagePath != null)
+            //{
+            //    uniqueFileName = Guid.NewGuid().ToString() + "_" + userDetailsAnkitDtos.ImagePath.FileName;
+            //    var filePath = Path.Combine(uploadFolder, uniqueFileName);
 
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    await userDetailsAnkitDtos.ImagePath.CopyToAsync(fileStream);
-                }
-            }
+            //    using (var fileStream = new FileStream(filePath, FileMode.Create))
+            //    {
+            //        await userDetailsAnkitDtos.ImagePath.CopyToAsync(fileStream);
+            //    }
+            //}
 
             var convertedfile = new UserDetailsAnkit
             {
@@ -60,8 +63,8 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
                 Phone = EncriptionAndDecription.EncryptData(userDetailsAnkitDtos.Phone),
                 AlternatePhone = EncriptionAndDecription.EncryptData(userDetailsAnkitDtos.AlternatePhone),
                 IsActive = userDetailsAnkitDtos.IsActive,
-                ImagePath = uniqueFileName != null ? "/uploads/" + uniqueFileName : null,
-                //ImagePath = "/null",
+                //ImagePath = uniqueFileName != null ? "/uploads/" + uniqueFileName : null,
+                ImagePath = "/null",
                 Password = EncriptionAndDecription.EncryptData(uniquePassword),
                 UserAddressAnkits = userDetailsAnkitDtos.UserAddressAnkits.Select(a => new UserAddressAnkit
                 {
@@ -84,7 +87,7 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
             return await _repository.GetAllUsers();
         }
 
-        public async Task<bool> LoginCredentialChecking(LoginCredentialDto loginCredentialDto)
+        public async Task<ResponseDto> LoginCredentialChecking(LoginCredentialDto loginCredentialDto)
         {
             var transformingData = new LoginCredentials()
             {
@@ -106,15 +109,23 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
             {   
                 var encrypt = EncriptionAndDecription.EncryptData(email);
                 var isPresent = await _repository.EmailIsPresentOrNot(encrypt);
+
+                //Get user by email
+                var user = await _repository.GetUserByEmail(EncriptionAndDecription.EncryptData(email));
+
                 if (isPresent)
                 {
                     //var tokenBytes = RandomNumberGenerator.GetBytes(64);
                     //var emailToken = Convert.ToBase64String(tokenBytes);
-            
+
+                    //TokenGenerationService generate = new TokenGenerationService();
+
+                    var tokenValue = _tokenGenerationService.GenerateToken(user);
+
                     var subj = "Click link below to change password";
-                    var body = "http://localhost:4200/auth/resetoldpassword";
+                    var body = $"http://localhost:4200/auth/resetoldpassword/?token={tokenValue}";
                     await _emailSenderService.SendEmailAsync(email, subj, body);
-                    return new ResponseDto { Data = null, Message = "Email sent successfully", StatusCode = 200 };
+                    return new ResponseDto { Data = tokenValue, Message = "Email sent successfully", StatusCode = 200 };
                 }
                 return new ResponseDto { Data = null, StatusCode = 401, Message = "You are not registered user" };
 

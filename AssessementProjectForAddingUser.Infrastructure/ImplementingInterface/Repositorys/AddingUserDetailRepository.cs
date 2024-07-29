@@ -13,11 +13,13 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
     {
         private readonly TestContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly TokenGenerationService _tokenGenerationService;
 
-        public AddingUserDetailRepository(TestContext context, IWebHostEnvironment webHostEnvironment)
+        public AddingUserDetailRepository(TestContext context, IWebHostEnvironment webHostEnvironment, TokenGenerationService tokenGeneration)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+            _tokenGenerationService = tokenGeneration;
         }
 
         public async Task<ResponseDto> AddingUserInDb(UserDetailsAnkit userAddress)
@@ -93,7 +95,7 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
                     Dob = o.Dob,
                     IsActive = o.IsActive,
                     ImagePath = o.ImagePath,
-                    //Password = EncriptionAndDecription.DecryptData(o.Password),
+                    Password = EncriptionAndDecription.DecryptData(o.Password),
                     UserAddressAnkits = o.UserAddressAnkits.Select(a => new UserAddressAnkit
                     {
                         AddressId = a.AddressId,
@@ -113,16 +115,28 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
 
         }
 
-        public async Task<bool> LoginCredentialChecking(LoginCredentials loginCredential)
+        public async Task<UserDetailsAnkit> GetUserByEmail(string email)
+        {
+            return await _context.UserDetailsAnkits.FirstOrDefaultAsync(a => a.Email == email);
+        }
+
+        public async Task<ResponseDto> LoginCredentialChecking(LoginCredentials loginCredential)
         {
             try
             {
                 bool exists = await _context.UserDetailsAnkits.AnyAsync(u => u.Email == loginCredential.Email && u.Password == loginCredential.Password && u.IsActive == true);
-                return exists;
+                if(exists)
+                {
+                    var userDetails = _context.UserDetailsAnkits.FirstOrDefault(x => x.Email == loginCredential.Email);
+                    
+                    var token = _tokenGenerationService.GenerateToken(userDetails);
+                    return new ResponseDto { Data =  token, Message = "Login successfully", StatusCode=200 };
+                }
+                return new ResponseDto { Data = null, Message = "You are not registered user", StatusCode = 401 };
             }
             catch (Exception ex)
             {
-                return false;
+                return new ResponseDto { Data = null, Message = ex.Message, StatusCode = 500 };
             }
 
         }

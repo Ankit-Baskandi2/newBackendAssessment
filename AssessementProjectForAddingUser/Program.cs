@@ -1,6 +1,7 @@
 using AssessementProjectForAddingUser.Application.Interface.IRepositorys;
 using AssessementProjectForAddingUser.Application.Interface.IServices;
 using AssessementProjectForAddingUser.Domain.DTOs;
+using AssessementProjectForAddingUser.Infrastructure.CustomLogic;
 using AssessementProjectForAddingUser.Infrastructure.Data;
 using AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.Repositorys;
 using AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.Services;
@@ -38,6 +39,8 @@ builder.Services.AddTransient<IAddingUserDetailRepository, AddingUserDetailRepos
 builder.Services.AddTransient<IAddingUserService, AddingUserService>();
 builder.Services.AddTransient<IEmailSenderService, EmailSenderService>();
 
+builder.Services.AddScoped<TokenGenerationService>();
+
 //Adding Cores
 builder.Services.AddCors(options =>
 {
@@ -51,41 +54,37 @@ builder.Services.AddCors(options =>
 
 
 //Jwt Authenctication
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+//{
+//    options.TokenValidationParameters = new TokenValidationParameters
+//    {
+//        ValidateIssuer = true,
+//        ValidateLifetime = true,
+//        ValidateIssuerSigningKey = true,
+//        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+//        ValidAudience = builder.Configuration["Jwt:Audience"],
+//        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:key"]))
+//    };
+//});
+
+//For Jwt
+builder.Services.AddAuthentication(options =>
 {
-    options.TokenValidationParameters = new TokenValidationParameters
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
     {
         ValidateIssuer = true,
+        ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:key"]))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
-
-//Another way to implement jwt token
-
-//var appSettingSection = builder.Configuration.GetSection("AppSettings");
-//builder.Services.Configure<AppSettings>(appSettingSection);
-//var appsetting = appSettingSection.Get<AppSettings>();
-//var key = Encoding.ASCII.GetBytes(appsetting.Secret);
-//builder.Services.AddAuthentication(x =>
-//{
-//    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-//    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-//}).AddJwtBearer(x =>
-//{
-//    x.RequireHttpsMetadata = false;
-//    x.SaveToken = true;
-//    x.TokenValidationParameters = new TokenValidationParameters()
-//    {
-//        ValidateIssuerSigningKey = true,
-//        IssuerSigningKey = new SymmetricSecurityKey(key),
-//        ValidateIssuer = false,
-//        ValidateAudience = false
-//    };
-//});
 
 
 var app = builder.Build();

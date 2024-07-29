@@ -1,5 +1,21 @@
 ﻿<Project>
   <ItemGroup>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploadImages\699c0446-cc33-4698-826a-82bcf6692c39_Icon1.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>AssessementProjectForAddingUser</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/AssessementProjectForAddingUser</BasePath>
+      <RelativePath>uploadImages/699c0446-cc33-4698-826a-82bcf6692c39_Icon1.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploadImages\699c0446-cc33-4698-826a-82bcf6692c39_Icon1.png))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploadImages\eacbf29f-af21-47e7-a23e-a3185632b369_Icon2.png))">
       <SourceType>Package</SourceType>
       <SourceId>AssessementProjectForAddingUser</SourceId>

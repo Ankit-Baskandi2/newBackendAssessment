@@ -26,12 +26,6 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
             {
                 throw;
             }
-
-            finally
-            {
-               
-            }
-
         }
     }
 }
