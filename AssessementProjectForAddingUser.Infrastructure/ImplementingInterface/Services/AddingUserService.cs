@@ -125,7 +125,7 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
                     var subj = "Click link below to change password";
                     var body = $"http://localhost:4200/auth/resetoldpassword/?token={tokenValue}";
                     await _emailSenderService.SendEmailAsync(email, subj, body);
-                    return new ResponseDto { Data = tokenValue, Message = "Email sent successfully", StatusCode = 200 };
+                    return new ResponseDto { Data = null, Message = "Email sent successfully", StatusCode = 200 };
                 }
                 return new ResponseDto { Data = null, StatusCode = 401, Message = "You are not registered user" };
 
