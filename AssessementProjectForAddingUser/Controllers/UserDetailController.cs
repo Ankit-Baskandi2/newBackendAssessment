@@ -21,7 +21,7 @@ namespace AssessementProjectForAddingUser.Controllers
         }
 
         [HttpPost("SaveUserDetail")]
-        public async Task<IActionResult> SaveDetail([FromBody] UserDetailsAnkitDtos userDetailsAnkitDtos)
+        public async Task<IActionResult> SaveDetail([FromForm] UserDetailsAnkitDtos userDetailsAnkitDtos)
         {       
             return Ok(await _addingUserService.AddingUserInDb(userDetailsAnkitDtos));
         }
@@ -61,6 +61,22 @@ namespace AssessementProjectForAddingUser.Controllers
         public async Task<IActionResult> UpdateDetails([FromForm] UserDetailsAnkitDtos userDetails)
         {
             return Ok(await _addingUserService.UpdateUserDetail(userDetails));
+        }
+
+        [HttpPost("ResetUserPassword")]
+        [Authorize]
+        public async Task<IActionResult> ResetPassword([FromBody] string password)
+        {
+            var header = Request.Headers["Authorization"].FirstOrDefault();
+
+            if (header == null || !header.StartsWith("Bearer "))
+            {
+                return Unauthorized(new ResponseDto { Data = null, Message = "Unauthorize", StatusCode=401});
+            }
+
+            var token = header.Substring("Bearer ".Length).Trim();
+
+            return Ok(await _addingUserService.ResetForgotedPasswod(password, token));
         }
     }
 }

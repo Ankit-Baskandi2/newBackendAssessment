@@ -10,6 +10,7 @@ namespace AssessementProjectForAddingUser.Application.Interface.IServices
         Task<ResponseDto> DeleteUserDetail(long Id);
         Task<ResponseDto> UpdateUserDetail(UserDetailsAnkitDtos detailsAnkitDtos);
         Task<ResponseDto> SendEmailToForgotPassword(string email);
+        Task<ResponseDto> ResetForgotedPasswod(string password, string token);
         
     }
 }

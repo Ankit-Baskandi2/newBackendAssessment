@@ -120,6 +120,11 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
             return await _context.UserDetailsAnkits.FirstOrDefaultAsync(a => a.Email == email);
         }
 
+        public async Task<UserDetailsAnkit> GetUserById(int id)
+        {
+            return await _context.UserDetailsAnkits.FirstOrDefaultAsync(a => a.UserId == id);
+        }
+
         public async Task<ResponseDto> LoginCredentialChecking(LoginCredentials loginCredential)
         {
             try
@@ -141,11 +146,16 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
 
         }
 
+        public async Task<ResponseDto> UpdatePassword(int Id, string password)
+        {
+            return new ResponseDto { Data = null, Message="",StatusCode=200};
+        }
+
         //public Task<ResponseDto> ChangePassword(string oldPassword, string newPassword)
         //{
         //    try
         //    {
-                
+
         //    }catch (Exception ex)
         //    {
 

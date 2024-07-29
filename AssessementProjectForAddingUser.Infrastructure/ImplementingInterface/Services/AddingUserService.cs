@@ -31,25 +31,25 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
             var credientailDetails = $"Email : {userDetailsAnkitDtos.Email}, Password :{uniquePassword}";
             _emailSenderService.SendEmailAsync(userDetailsAnkitDtos.Email, message, credientailDetails);
 
-            //var uploadFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploadImages");
+            var uploadFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploadImages");
 
-            //if (!Directory.Exists(uploadFolder))
-            //{
-            //    Directory.CreateDirectory(uploadFolder);
-            //}
+            if (!Directory.Exists(uploadFolder))
+            {
+                Directory.CreateDirectory(uploadFolder);
+            }
 
-            //string uniqueFileName = null;
+            string uniqueFileName = null;
 
-            //if (userDetailsAnkitDtos.ImagePath != null)
-            //{
-            //    uniqueFileName = Guid.NewGuid().ToString() + "_" + userDetailsAnkitDtos.ImagePath.FileName;
-            //    var filePath = Path.Combine(uploadFolder, uniqueFileName);
+            if (userDetailsAnkitDtos.ImagePath != null)
+            {
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + userDetailsAnkitDtos.ImagePath.FileName;
+                var filePath = Path.Combine(uploadFolder, uniqueFileName);
 
-            //    using (var fileStream = new FileStream(filePath, FileMode.Create))
-            //    {
-            //        await userDetailsAnkitDtos.ImagePath.CopyToAsync(fileStream);
-            //    }
-            //}
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await userDetailsAnkitDtos.ImagePath.CopyToAsync(fileStream);
+                }
+            }
 
             var convertedfile = new UserDetailsAnkit
             {
@@ -63,8 +63,8 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
                 Phone = EncriptionAndDecription.EncryptData(userDetailsAnkitDtos.Phone),
                 AlternatePhone = EncriptionAndDecription.EncryptData(userDetailsAnkitDtos.AlternatePhone),
                 IsActive = userDetailsAnkitDtos.IsActive,
-                //ImagePath = uniqueFileName != null ? "/uploads/" + uniqueFileName : null,
-                ImagePath = "/null",
+                ImagePath = uniqueFileName != null ? "/uploads/" + uniqueFileName : null,
+                //ImagePath = "/null",
                 Password = EncriptionAndDecription.EncryptData(uniquePassword),
                 UserAddressAnkits = userDetailsAnkitDtos.UserAddressAnkits.Select(a => new UserAddressAnkit
                 {
@@ -139,6 +139,17 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
         public async Task<ResponseDto> UpdateUserDetail(UserDetailsAnkitDtos detailsAnkitDtos)
         {
             return await _repository.UpdateUserDetail(detailsAnkitDtos);
+        }
+
+        public async Task<ResponseDto> ResetForgotedPasswod(string password, string token)
+        {
+            var id = await _tokenGenerationService.ValidateJwtToken(token);
+
+            if (id == -1)
+                return new ResponseDto { Data = null, Message = "Token expired", StatusCode = 401 };
+
+            return await _repository.UpdatePassword(id, password);
+
         }
     }
 }

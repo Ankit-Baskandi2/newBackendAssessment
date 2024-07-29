@@ -31,7 +31,7 @@ namespace AssessementProjectForAddingUser.Domain.DTOs
 
         public string? AlternatePhone { get; set; }
 
-        //public IFormFile ImagePath { get; set; }
+        public IFormFile ImagePath { get; set; }
 
         public bool? IsActive { get; set; } = false;
 

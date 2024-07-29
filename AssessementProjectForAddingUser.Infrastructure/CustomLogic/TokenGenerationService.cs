@@ -59,5 +59,36 @@ namespace AssessementProjectForAddingUser.Infrastructure.CustomLogic
 
             return tokenValue;
         }
+
+        public async Task<int> ValidateJwtToken(string token)
+        {
+            var key = Encoding.UTF8.GetBytes(_config["Jwt:Key"]);
+
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var validationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = _config["Jwt:Issuer"],
+                ValidAudience = _config["Jwt:Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(key)
+            };
+
+            SecurityToken validatedToken;
+
+            var principal = tokenHandler.ValidateToken(token, validationParameters, out validatedToken);
+
+
+            // If the token is valid, return the user ID
+            if (principal.Identity.IsAuthenticated)
+            {
+                var Id = int.Parse(principal.FindFirst("Id")?.Value ?? "0");
+                return Id;
+            }
+
+            return -1;
+
+        }
     }
 }
