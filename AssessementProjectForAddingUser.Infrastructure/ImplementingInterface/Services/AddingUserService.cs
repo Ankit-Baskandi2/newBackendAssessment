@@ -123,7 +123,7 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
                     var tokenValue = _tokenGenerationService.GenerateToken(user);
 
                     var subj = "Click link below to change password";
-                    var body = $"http://localhost:4200/auth/resetoldpassword/?token={tokenValue}";
+                    var body = $"http://localhost:4200/auth/resetoldpassword/{tokenValue}";
                     await _emailSenderService.SendEmailAsync(email, subj, body);
                     return new ResponseDto { Data = null, Message = "Email sent successfully", StatusCode = 200 };
                 }

@@ -24,7 +24,8 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
             }
             catch(Exception ex)
             {
-                throw;
+                Console.WriteLine(ex.Message);
+                return Task.CompletedTask;
             }
         }
     }

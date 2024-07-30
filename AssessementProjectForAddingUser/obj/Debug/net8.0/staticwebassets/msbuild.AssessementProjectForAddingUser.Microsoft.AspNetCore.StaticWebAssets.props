@@ -1,5 +1,21 @@
 ﻿<Project>
   <ItemGroup>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploadImages\31931d53-87eb-4d20-9e59-2f877f4d1fc0_Icon1.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>AssessementProjectForAddingUser</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/AssessementProjectForAddingUser</BasePath>
+      <RelativePath>uploadImages/31931d53-87eb-4d20-9e59-2f877f4d1fc0_Icon1.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploadImages\31931d53-87eb-4d20-9e59-2f877f4d1fc0_Icon1.png))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploadImages\699c0446-cc33-4698-826a-82bcf6692c39_Icon1.png))">
       <SourceType>Package</SourceType>
       <SourceId>AssessementProjectForAddingUser</SourceId>
@@ -15,6 +31,38 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploadImages\699c0446-cc33-4698-826a-82bcf6692c39_Icon1.png))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploadImages\7aded7a0-cf1c-4b8c-8430-a73333ca77f0_random.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>AssessementProjectForAddingUser</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/AssessementProjectForAddingUser</BasePath>
+      <RelativePath>uploadImages/7aded7a0-cf1c-4b8c-8430-a73333ca77f0_random.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploadImages\7aded7a0-cf1c-4b8c-8430-a73333ca77f0_random.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploadImages\da0850eb-3f4a-4c7e-b94f-b2608eb68e7b_emailSend.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>AssessementProjectForAddingUser</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/AssessementProjectForAddingUser</BasePath>
+      <RelativePath>uploadImages/da0850eb-3f4a-4c7e-b94f-b2608eb68e7b_emailSend.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploadImages\da0850eb-3f4a-4c7e-b94f-b2608eb68e7b_emailSend.png))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploadImages\eacbf29f-af21-47e7-a23e-a3185632b369_Icon2.png))">
       <SourceType>Package</SourceType>

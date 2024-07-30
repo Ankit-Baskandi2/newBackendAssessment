@@ -57,7 +57,7 @@ namespace AssessementProjectForAddingUser.Controllers
 
         //}
 
-        [HttpPost("UpdateUserDetail")]
+        [HttpPut("UpdateUserDetail")]
         public async Task<IActionResult> UpdateDetails([FromForm] UserDetailsAnkitDtos userDetails)
         {
             return Ok(await _addingUserService.UpdateUserDetail(userDetails));
@@ -65,7 +65,7 @@ namespace AssessementProjectForAddingUser.Controllers
 
         [HttpPost("ResetUserPassword")]
         [Authorize]
-        public async Task<IActionResult> ResetPassword([FromBody] string password)
+        public async Task<IActionResult> ResetPassword(string password)
         {
             var header = Request.Headers["Authorization"].FirstOrDefault();
 

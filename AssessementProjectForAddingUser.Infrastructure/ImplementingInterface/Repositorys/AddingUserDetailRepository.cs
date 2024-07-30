@@ -148,6 +148,7 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
 
         public async Task<ResponseDto> UpdatePassword(int Id, string password)
         {
+            
             return new ResponseDto { Data = null, Message="",StatusCode=200};
         }
 
