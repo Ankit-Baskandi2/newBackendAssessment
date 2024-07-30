@@ -11,7 +11,7 @@ namespace AssessementProjectForAddingUser.Application.Interface.IRepositorys
 
         Task<ResponseDto> GetAllUsers();
 
-        Task<ResponseDto> DeleteUserDetail(long Id);
+        Task<ResponseDto> DeleteUserDetail(long id);
 
         Task<ResponseDto> UpdateUserDetail(UserDetailsAnkitDtos userDetailsAnkit);
 
@@ -19,9 +19,9 @@ namespace AssessementProjectForAddingUser.Application.Interface.IRepositorys
 
         Task<UserDetailsAnkit> GetUserByEmail(string email);
 
-        Task<UserDetailsAnkit> GetUserById(int id);
+        Task<UserDetailsAnkit> GetUserById(long id);
         
-        Task<ResponseDto> UpdatePassword(int Id, string password);
-        //Task<ResponseDto> ChangePassword(string oldPassword,  string newPassword);
+        Task<ResponseDto> UpdatePassword(long id, ResetPasswordDto password);
+        Task<ResponseDto> ChangePasswordWhenUserLogedIn(long id,ChangePasswordWhenLogedInDto ChangelogedInDto);
     }
 }

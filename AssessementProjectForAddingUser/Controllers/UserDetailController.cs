@@ -51,11 +51,18 @@ namespace AssessementProjectForAddingUser.Controllers
             return Ok(await _addingUserService.SendEmailToForgotPassword(email));
         }
 
-        //[HttpPost("ChangePassword")]
-        //public async Task<IActionResult> ChangePassword(string oldPassword, string newPassword)
-        //{
+        [HttpPost("ChangePassword")]
+        public async Task<IActionResult> ChangePasswordWhenLogedIn([FromBody] ChangePasswordWhenLogedInDto changePasswordWhenLoged)
+        {
+            var header = Request.Headers["Authorization"].FirstOrDefault();
 
-        //}
+            if (header == null || !header.StartsWith("Bearer "))
+                return Unauthorized(new ResponseDto { Data = null, Message = "Unauthorize", StatusCode = 401 });
+
+            var token = header.Substring("Bearer ".Length).Trim();
+
+            return Ok(await _addingUserService.ChangeLogedInUserPassword(changePasswordWhenLoged, token));
+        }
 
         [HttpPut("UpdateUserDetail")]
         public async Task<IActionResult> UpdateDetails([FromForm] UserDetailsAnkitDtos userDetails)
@@ -65,14 +72,12 @@ namespace AssessementProjectForAddingUser.Controllers
 
         [HttpPost("ResetUserPassword")]
         [Authorize]
-        public async Task<IActionResult> ResetPassword(string password)
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto password)
         {
             var header = Request.Headers["Authorization"].FirstOrDefault();
 
             if (header == null || !header.StartsWith("Bearer "))
-            {
                 return Unauthorized(new ResponseDto { Data = null, Message = "Unauthorize", StatusCode=401});
-            }
 
             var token = header.Substring("Bearer ".Length).Trim();
 

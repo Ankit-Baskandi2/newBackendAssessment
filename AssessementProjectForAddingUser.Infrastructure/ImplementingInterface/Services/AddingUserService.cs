@@ -98,9 +98,9 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
             return await _repository.LoginCredentialChecking(transformingData);
         }
 
-        public async Task<ResponseDto> DeleteUserDetail(long Id)
+        public async Task<ResponseDto> DeleteUserDetail(long id)
         {
-            return await _repository.DeleteUserDetail(Id);
+            return await _repository.DeleteUserDetail(id);
         }
 
         public async Task<ResponseDto> SendEmailToForgotPassword(string email)
@@ -141,7 +141,7 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
             return await _repository.UpdateUserDetail(detailsAnkitDtos);
         }
 
-        public async Task<ResponseDto> ResetForgotedPasswod(string password, string token)
+        public async Task<ResponseDto> ResetForgotedPasswod(ResetPasswordDto password, string token)
         {
             var id = await _tokenGenerationService.ValidateJwtToken(token);
 
@@ -150,6 +150,15 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
 
             return await _repository.UpdatePassword(id, password);
 
+        }
+
+        public async Task<ResponseDto> ChangeLogedInUserPassword(ChangePasswordWhenLogedInDto changePassword, string token)
+        {
+            var id = await _tokenGenerationService.ValidateJwtToken(token);
+
+            if (id == -1)
+                return new ResponseDto { Data = null, Message = "Token expired", StatusCode = 401 };
+            return await _repository.ChangePasswordWhenUserLogedIn(id, changePassword);
         }
     }
 }

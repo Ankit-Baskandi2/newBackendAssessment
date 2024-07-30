@@ -6,6 +6,7 @@ using AssessementProjectForAddingUser.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Hosting;
+using System.Reflection.Metadata;
 
 namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.Repositorys
 {
@@ -37,7 +38,7 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
 
         }
 
-        public async Task<ResponseDto> DeleteUserDetail(long Id)
+        public async Task<ResponseDto> DeleteUserDetail(long id)
         {
             try
             {
@@ -49,7 +50,7 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
                     Size = 30
                 };
 
-                var parameter = new SqlParameter("@Id", Id);
+                var parameter = new SqlParameter("@Id", id);
 
                 await _context.Database.ExecuteSqlRawAsync("EXEC UP_InActivateUser @Id, @message OUTPUT", parameter, messageParameter);
 
@@ -120,7 +121,7 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
             return await _context.UserDetailsAnkits.FirstOrDefaultAsync(a => a.Email == email);
         }
 
-        public async Task<UserDetailsAnkit> GetUserById(int id)
+        public async Task<UserDetailsAnkit> GetUserById(long id)
         {
             return await _context.UserDetailsAnkits.FirstOrDefaultAsync(a => a.UserId == id);
         }
@@ -146,23 +147,32 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
 
         }
 
-        public async Task<ResponseDto> UpdatePassword(int Id, string password)
+        public async Task<ResponseDto> UpdatePassword(long id, ResetPasswordDto password)
         {
-            
-            return new ResponseDto { Data = null, Message="",StatusCode=200};
+            try
+            {
+                var messageParameter = new SqlParameter
+                {
+                    ParameterName = "@message",
+                    SqlDbType = System.Data.SqlDbType.VarChar,
+                    Direction = System.Data.ParameterDirection.Output,
+                    Size = 40
+                };
+
+                var encriptPassword = EncriptionAndDecription.EncryptData(password.Password);
+                var parameter1 = new SqlParameter("@Id", System.Data.SqlDbType.BigInt) { Value = id };
+                var parameter2 = new SqlParameter("@password", System.Data.SqlDbType.VarChar, 200) { Value = encriptPassword };
+
+                await _context.Database.ExecuteSqlRawAsync("EXEC UP_UpdatePassword @Id, @password, @message OUTPUT",
+                    parameter1, parameter2, messageParameter);
+                var message = messageParameter.Value.ToString();
+                return new ResponseDto { Data = null, Message = message, StatusCode = 200 };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseDto { Data= null, Message = ex.Message,StatusCode = 401 };
+            }
         }
-
-        //public Task<ResponseDto> ChangePassword(string oldPassword, string newPassword)
-        //{
-        //    try
-        //    {
-
-        //    }catch (Exception ex)
-        //    {
-
-        //    }
-        //}
-
 
         public async Task<ResponseDto> UpdateUserDetail(UserDetailsAnkitDtos userDetailsAnkitDto)
         {
@@ -219,6 +229,41 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
             catch(Exception ex)
             {
                 return new ResponseDto { Data = null, Message = ex.Message, StatusCode = 500 };
+            }
+        }
+
+        public async Task<ResponseDto> ChangePasswordWhenUserLogedIn(long id,ChangePasswordWhenLogedInDto ChangelogedInDto)
+        {
+            try
+            {
+                var encryptPass = EncriptionAndDecription.EncryptData(ChangelogedInDto.OldPassword);
+                var userInDb = await _context.UserDetailsAnkits.Where(u => u.UserId == id).Select(u => new { u.Password }).FirstOrDefaultAsync();
+                if (userInDb == null)
+                    return new ResponseDto { Data = null, Message = "Record not found", StatusCode = 404 };
+                if (userInDb.Password != encryptPass)
+                    return new ResponseDto { Data = null, Message = "Old password is incorrect", StatusCode = 401 };
+
+                var messageParameter = new SqlParameter
+                {
+                    ParameterName = "@message",
+                    SqlDbType = System.Data.SqlDbType.VarChar,
+                    Direction = System.Data.ParameterDirection.Output,
+                    Size = 40
+                };
+
+                var encriptPassword = EncriptionAndDecription.EncryptData(ChangelogedInDto.Password);
+                var parameter1 = new SqlParameter("@Id", System.Data.SqlDbType.BigInt) { Value = id };
+                var parameter2 = new SqlParameter("@password", System.Data.SqlDbType.VarChar, 200) { Value = encriptPassword };
+
+                await _context.Database.ExecuteSqlRawAsync("EXEC UP_UpdatePassword @Id, @password, @message OUTPUT",
+                    parameter1, parameter2, messageParameter);
+                var message = messageParameter.Value.ToString();
+                return new ResponseDto { Data = null, Message = message, StatusCode = 200 };
+
+            }
+            catch(Exception ex)
+            {
+                return new ResponseDto { Data = null, Message= ex.Message, StatusCode = 500 };
             }
         }
     }
