@@ -48,6 +48,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploadImages\7aded7a0-cf1c-4b8c-8430-a73333ca77f0_random.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploadImages\ca2fe09a-5958-4e6a-97be-89eef804ee6c_emailSend.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>AssessementProjectForAddingUser</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/AssessementProjectForAddingUser</BasePath>
+      <RelativePath>uploadImages/ca2fe09a-5958-4e6a-97be-89eef804ee6c_emailSend.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploadImages\ca2fe09a-5958-4e6a-97be-89eef804ee6c_emailSend.png))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploadImages\da0850eb-3f4a-4c7e-b94f-b2608eb68e7b_emailSend.png))">
       <SourceType>Package</SourceType>
       <SourceId>AssessementProjectForAddingUser</SourceId>

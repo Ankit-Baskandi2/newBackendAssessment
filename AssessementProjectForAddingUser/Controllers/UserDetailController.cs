@@ -51,7 +51,7 @@ namespace AssessementProjectForAddingUser.Controllers
             return Ok(await _addingUserService.SendEmailToForgotPassword(email));
         }
 
-        [HttpPost("ChangePassword")]
+        [HttpPost("ChangePassword"),Authorize]
         public async Task<IActionResult> ChangePasswordWhenLogedIn([FromBody] ChangePasswordWhenLogedInDto changePasswordWhenLoged)
         {
             var header = Request.Headers["Authorization"].FirstOrDefault();
@@ -70,8 +70,7 @@ namespace AssessementProjectForAddingUser.Controllers
             return Ok(await _addingUserService.UpdateUserDetail(userDetails));
         }
 
-        [HttpPost("ResetUserPassword")]
-        [Authorize]
+        [HttpPost("ResetUserPassword"),Authorize]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto password)
         {
             var header = Request.Headers["Authorization"].FirstOrDefault();

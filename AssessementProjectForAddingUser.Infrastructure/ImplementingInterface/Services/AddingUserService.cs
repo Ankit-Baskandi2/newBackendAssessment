@@ -28,7 +28,25 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
         {
             var message = "Use this email and passwod to login";
             var uniquePassword = GeneratePassword.GenerateUniquePassword();
-            var credientailDetails = $"Email : {userDetailsAnkitDtos.Email}, Password :{uniquePassword}";
+            var credientailDetails = $@"<html>
+           <head></head>      
+          <body style="" margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;"">
+           <div style=""height:auto;background: linear-gradient(to top, #c9c9ff 50%,#6e6ef6 90%) no-repeat;width:400px;padding:30px;"">
+               <div>
+                      <div>
+                         <h1>Dear ""{userDetailsAnkitDtos.FirstName}""</h2>
+                         <h1>Activate your account</h1>
+                          <hr>
+                          <p>You're Login credentials are below :</p>
+                           <p> Email : {userDetailsAnkitDtos.Email}</p>
+                            <p> Password : {uniquePassword} </p>      
+                           <p>Do not share you details with others</p>
+                      </div>
+               </div>
+           </div>
+         </body>
+         </html>";
+            //var credientailDetails = $"Email : {userDetailsAnkitDtos.Email}, Password :{uniquePassword}";
             _emailSenderService.SendEmailAsync(userDetailsAnkitDtos.Email, message, credientailDetails);
 
             var uploadFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploadImages");
@@ -110,16 +128,10 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
                 var encrypt = EncriptionAndDecription.EncryptData(email);
                 var isPresent = await _repository.EmailIsPresentOrNot(encrypt);
 
-                //Get user by email
                 var user = await _repository.GetUserByEmail(EncriptionAndDecription.EncryptData(email));
 
                 if (isPresent)
                 {
-                    //var tokenBytes = RandomNumberGenerator.GetBytes(64);
-                    //var emailToken = Convert.ToBase64String(tokenBytes);
-
-                    //TokenGenerationService generate = new TokenGenerationService();
-
                     var tokenValue = _tokenGenerationService.GenerateToken(user);
 
                     var subj = "Click link below to change password";

@@ -6,7 +6,6 @@ using AssessementProjectForAddingUser.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Hosting;
-using System.Reflection.Metadata;
 
 namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.Repositorys
 {
@@ -136,7 +135,7 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
                     var userDetails = _context.UserDetailsAnkits.FirstOrDefault(x => x.Email == loginCredential.Email);
                     
                     var token = _tokenGenerationService.GenerateToken(userDetails);
-                    return new ResponseDto { Data =  token, Message = "Login successfully", StatusCode=200 };
+                    return new ResponseDto { Data =  token, Message = userDetails.FirstName+userDetails.LastName, StatusCode=200 };
                 }
                 return new ResponseDto { Data = null, Message = "You are not registered user", StatusCode = 401 };
             }
@@ -144,7 +143,6 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
             {
                 return new ResponseDto { Data = null, Message = ex.Message, StatusCode = 500 };
             }
-
         }
 
         public async Task<ResponseDto> UpdatePassword(long id, ResetPasswordDto password)
@@ -220,7 +218,6 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
                         }
                     }
 
-                    // Save changes to the database
                     await _context.SaveChangesAsync();
                     return new ResponseDto { Data = null, Message = "Data updated Successfully", StatusCode = 200 };
                 }
