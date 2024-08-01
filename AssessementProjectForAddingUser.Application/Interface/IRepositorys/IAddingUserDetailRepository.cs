@@ -22,6 +22,9 @@ namespace AssessementProjectForAddingUser.Application.Interface.IRepositorys
         Task<UserDetailsAnkit> GetUserById(long id);
         
         Task<ResponseDto> UpdatePassword(long id, ResetPasswordDto password);
+
         Task<ResponseDto> ChangePasswordWhenUserLogedIn(long id,ChangePasswordWhenLogedInDto ChangelogedInDto);
+
+        Task<ResetPasswordDto> GetDataThroughPagination(PaginationDto pagination);
     }
 }

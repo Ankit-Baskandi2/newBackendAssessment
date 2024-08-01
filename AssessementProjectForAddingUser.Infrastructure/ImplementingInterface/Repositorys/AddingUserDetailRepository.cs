@@ -263,5 +263,35 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
                 return new ResponseDto { Data = null, Message= ex.Message, StatusCode = 500 };
             }
         }
+
+        public async Task<ResetPasswordDto> GetDataThroughPagination(PaginationDto pagination)
+        {
+            var query = _context.UserDetailsAnkits.Include(u => u.UserAddressAnkits).AsQueryable();
+
+            if (!string.IsNullOrEmpty(pagination.Name))
+            {
+                query = query.Where(x => x.FirstName.Contains(pagination.Name));
+            }
+
+            if (!string.IsNullOrEmpty(pagination.ContactNo))
+            {
+                query = query.Where(x => x.Phone.Contains(pagination.ContactNo));
+            }
+
+            var queryCount = await query.CountAsync();
+
+            var dataList = await query.Skip((pagination.PageNumber - 1) * pagination.PageSize).Take(pagination.PageSize).
+                Select(user => new UserDetailsAnkit
+                {
+                    UserId = user.UserId,
+                    FirstName = user.FirstName,
+                    MiddleName = user.MiddleName,
+                    LastName = user.LastName,
+                    Phone = user.Phone,
+                    AlternatePhone = user.AlternatePhone,
+                    Gender = user.Gender,
+
+                })
+        }
     }
 }

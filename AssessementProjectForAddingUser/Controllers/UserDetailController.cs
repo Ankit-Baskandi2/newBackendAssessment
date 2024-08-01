@@ -82,5 +82,11 @@ namespace AssessementProjectForAddingUser.Controllers
 
             return Ok(await _addingUserService.ResetForgotedPasswod(password, token));
         }
+
+        [HttpGet("GetDataAccordinToPaginarion")]
+        public async Task<IActionResult> Pagination([FromBody] PaginationDto pagination)
+        {
+
+        }
     }
 }
