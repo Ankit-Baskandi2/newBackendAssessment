@@ -25,6 +25,6 @@ namespace AssessementProjectForAddingUser.Application.Interface.IRepositorys
 
         Task<ResponseDto> ChangePasswordWhenUserLogedIn(long id,ChangePasswordWhenLogedInDto ChangelogedInDto);
 
-        Task<ResetPasswordDto> GetDataThroughPagination(PaginationDto pagination);
+        Task<ResponseDto> GetDataThroughPagination(PaginationDto pagination);
     }
 }

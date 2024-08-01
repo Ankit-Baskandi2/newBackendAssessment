@@ -129,13 +129,15 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
         {
             try
             {
-                bool exists = await _context.UserDetailsAnkits.AnyAsync(u => u.Email == loginCredential.Email && u.Password == loginCredential.Password && u.IsActive == true);
+                bool exists = await _context.UserDetailsAnkits.AnyAsync(u => u.Email == loginCredential.Email && u.Password == loginCredential.Password);
+
+
                 if(exists)
                 {
                     var userDetails = _context.UserDetailsAnkits.FirstOrDefault(x => x.Email == loginCredential.Email);
                     
                     var token = _tokenGenerationService.GenerateToken(userDetails);
-                    return new ResponseDto { Data =  token, Message = userDetails.FirstName+userDetails.LastName, StatusCode=200 };
+                    return new ResponseDto { Data =  token, Message = userDetails.FirstName, StatusCode=200 };
                 }
                 return new ResponseDto { Data = null, Message = "You are not registered user", StatusCode = 401 };
             }
@@ -264,34 +266,57 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
             }
         }
 
-        public async Task<ResetPasswordDto> GetDataThroughPagination(PaginationDto pagination)
+        public async Task<ResponseDto> GetDataThroughPagination(PaginationDto pagination)
         {
-            var query = _context.UserDetailsAnkits.Include(u => u.UserAddressAnkits).AsQueryable();
 
-            if (!string.IsNullOrEmpty(pagination.Name))
+            try
             {
-                query = query.Where(x => x.FirstName.Contains(pagination.Name));
-            }
+                var query = _context.UserDetailsAnkits.Include(u => u.UserAddressAnkits).AsQueryable();
 
-            if (!string.IsNullOrEmpty(pagination.ContactNo))
-            {
-                query = query.Where(x => x.Phone.Contains(pagination.ContactNo));
-            }
+                var totalCount = await query.CountAsync();
+                var totalPages = (int)Math.Ceiling((decimal)totalCount/pagination.PageSize);
 
-            var queryCount = await query.CountAsync();
-
-            var dataList = await query.Skip((pagination.PageNumber - 1) * pagination.PageSize).Take(pagination.PageSize).
-                Select(user => new UserDetailsAnkit
+                if (!string.IsNullOrEmpty(pagination.Name))
                 {
-                    UserId = user.UserId,
-                    FirstName = user.FirstName,
-                    MiddleName = user.MiddleName,
-                    LastName = user.LastName,
-                    Phone = user.Phone,
-                    AlternatePhone = user.AlternatePhone,
-                    Gender = user.Gender,
+                    query = query.Where(x => x.FirstName.Contains(pagination.Name));
+                }
 
-                })
+                if (!string.IsNullOrEmpty(pagination.ContactNo))
+                {
+                    query = query.Where(x => x.Phone.Contains(EncriptionAndDecription.EncryptData(pagination.ContactNo)));
+                }
+
+
+                var dataList = await query.Skip((pagination.PageNumber - 1) * pagination.PageSize).Take(pagination.PageSize).
+                    Select(user => new UserDetailsAnkit
+                    {
+                        UserId = user.UserId,
+                        FirstName = user.FirstName,
+                        MiddleName = user.MiddleName,
+                        LastName = user.LastName,
+                        Phone = EncriptionAndDecription.DecryptData(user.Phone),
+                        AlternatePhone = EncriptionAndDecription.DecryptData(user.AlternatePhone),
+                        Gender = user.Gender,
+                        Email = EncriptionAndDecription.DecryptData(user.Email),
+                        Dob = user.Dob,
+                        DateOfjoining = user.DateOfjoining,
+                        IsActive = user.IsActive,
+                        ImagePath = user.ImagePath,
+                        UserAddressAnkits = user.UserAddressAnkits.Select(a => new UserAddressAnkit
+                        {
+                            AddressId = a.AddressId,
+                            Country = a.Country,
+                            State = a.State,
+                            City = a.City,
+                            ZipCode = a.ZipCode
+                        }).ToList()
+                    }).ToListAsync();
+
+                return new ResponseDto { Data = dataList, Message = "", StatusCode = 200 };
+            } catch(Exception ex)
+            {
+                return new ResponseDto { Data = null, Message = ex.Message, StatusCode = 401};
+            }
         }
     }
 }

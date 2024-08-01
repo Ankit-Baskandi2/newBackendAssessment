@@ -5,7 +5,7 @@ namespace AssessementProjectForAddingUser.Domain.DTOs
     {
         public long AddressId { get; set; }
 
-        public string City { get; set; } = null!;
+        public string? City { get; set; }
 
         public string? State { get; set; }
 

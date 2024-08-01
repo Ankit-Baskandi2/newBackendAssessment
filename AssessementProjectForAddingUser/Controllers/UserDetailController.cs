@@ -83,10 +83,10 @@ namespace AssessementProjectForAddingUser.Controllers
             return Ok(await _addingUserService.ResetForgotedPasswod(password, token));
         }
 
-        [HttpGet("GetDataAccordinToPaginarion")]
+        [HttpPost("GetDataAccordinToPaginarion")]
         public async Task<IActionResult> Pagination([FromBody] PaginationDto pagination)
         {
-
+            return Ok(await _addingUserService.PaginationToAccessData(pagination));
         }
     }
 }

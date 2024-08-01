@@ -81,7 +81,7 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
                 Phone = EncriptionAndDecription.EncryptData(userDetailsAnkitDtos.Phone),
                 AlternatePhone = EncriptionAndDecription.EncryptData(userDetailsAnkitDtos.AlternatePhone),
                 IsActive = userDetailsAnkitDtos.IsActive,
-                ImagePath = uniqueFileName != null ? "/uploads/" + uniqueFileName : null,
+                ImagePath = uniqueFileName != null ? "/uploadImages/" + uniqueFileName : null,
                 //ImagePath = "/null",
                 Password = EncriptionAndDecription.EncryptData(uniquePassword),
                 UserAddressAnkits = userDetailsAnkitDtos.UserAddressAnkits.Select(a => new UserAddressAnkit
@@ -161,7 +161,6 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
                 return new ResponseDto { Data = null, Message = "Token expired", StatusCode = 401 };
 
             return await _repository.UpdatePassword(id, password);
-
         }
 
         public async Task<ResponseDto> ChangeLogedInUserPassword(ChangePasswordWhenLogedInDto changePassword, string token)
@@ -171,6 +170,11 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
             if (id == -1)
                 return new ResponseDto { Data = null, Message = "Token expired", StatusCode = 401 };
             return await _repository.ChangePasswordWhenUserLogedIn(id, changePassword);
+        }
+
+        public async Task<ResponseDto> PaginationToAccessData(PaginationDto paginationDto)
+        {
+            return await _repository.GetDataThroughPagination(paginationDto);
         }
     }
 }
