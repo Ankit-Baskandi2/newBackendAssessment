@@ -22,7 +22,7 @@ namespace AssessementProjectForAddingUser.Controllers
 
         [HttpPost("SaveUserDetail")]
         public async Task<IActionResult> SaveDetail([FromForm] UserDetailsAnkitDtos userDetailsAnkitDtos)
-        {       
+        {
             return Ok(await _addingUserService.AddingUserInDb(userDetailsAnkitDtos));
         }
 

@@ -19,7 +19,7 @@ namespace AssessementProjectForAddingUser.Domain.HelperClass
                            <a href=""http;//localhost:4200/reset?email={email}&code={emailToken}"" target=""_blank"" style=""background:#0d6efc;
                                  color:white;border-radius:4px ;display:block;margin:0 auto;width:50%;text-align:ceneter;text-decoration:none"">Activate Account</a>
                            <p>Kind Regards,<br><br>
-                              Prashant and groups</p>
+                              Ankit Baskandi</p>
                       </div>
                </div>
            </div>

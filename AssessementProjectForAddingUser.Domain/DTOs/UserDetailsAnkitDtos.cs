@@ -21,6 +21,7 @@ namespace AssessementProjectForAddingUser.Domain.DTOs
 
         public DateOnly? DateOfjoining { get; set; }
 
+        [Required(ErrorMessage ="Date of birth can't be empty")]
         public DateOnly? Dob { get; set; }
 
         [Required(ErrorMessage = "Email can't be empty")]
