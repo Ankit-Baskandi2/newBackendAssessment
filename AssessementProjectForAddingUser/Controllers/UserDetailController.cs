@@ -1,5 +1,6 @@
 ﻿using AssessementProjectForAddingUser.Application.Interface.IServices;
 using AssessementProjectForAddingUser.Domain.DTOs;
+using AssessementProjectForAddingUser.Domain.HelperClass;
 using AssessementProjectForAddingUser.Infrastructure.CustomLogic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -57,7 +58,7 @@ namespace AssessementProjectForAddingUser.Controllers
             var header = Request.Headers["Authorization"].FirstOrDefault();
 
             if (header == null || !header.StartsWith("Bearer "))
-                return Unauthorized(new ResponseDto { Data = null, Message = "Unauthorize", StatusCode = 401 });
+                return Unauthorized(new ResponseDto { Data = null, Message = ResponseMessageClass.unauthorizeUser, StatusCode = ResponseMessageClass.unsuccessStatusCode });
 
             var token = header.Substring("Bearer ".Length).Trim();
 
@@ -76,7 +77,7 @@ namespace AssessementProjectForAddingUser.Controllers
             var header = Request.Headers["Authorization"].FirstOrDefault();
 
             if (header == null || !header.StartsWith("Bearer "))
-                return Unauthorized(new ResponseDto { Data = null, Message = "Unauthorize", StatusCode=401});
+                return Unauthorized(new ResponseDto { Data = null, Message = ResponseMessageClass.unauthorizeUser, StatusCode=ResponseMessageClass.unsuccessStatusCode});
 
             var token = header.Substring("Bearer ".Length).Trim();
 

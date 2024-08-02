@@ -6,6 +6,7 @@ using AssessementProjectForAddingUser.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Hosting;
+using AssessementProjectForAddingUser.Domain.HelperClass;
 
 namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.Repositorys
 {
@@ -28,11 +29,11 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
             {
                 _context.UserDetailsAnkits.Add(userAddress);
                 await _context.SaveChangesAsync();
-                return new ResponseDto { Data = null, Message = "Data save successfully", StatusCode = 200 };
+                return new ResponseDto { Data = null, Message = ResponseMessageClass.addedSuccess, StatusCode = ResponseMessageClass.successStatusCode };
             }
             catch (Exception ex)
             {
-                return new ResponseDto { Data = null, Message = ex.Message, StatusCode = 401 };
+                return new ResponseDto { Data = null, Message = ex.Message, StatusCode = ResponseMessageClass.unsuccessStatusCode };
             }
 
         }
@@ -54,11 +55,11 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
                 await _context.Database.ExecuteSqlRawAsync("EXEC UP_InActivateUser @Id, @message OUTPUT", parameter, messageParameter);
 
                 var message = messageParameter.Value.ToString();
-                return new ResponseDto { Data = null, Message =  message, StatusCode = 200 };
+                return new ResponseDto { Data = null, Message =  message, StatusCode = ResponseMessageClass.successStatusCode };
             }
             catch(Exception ex)
             {
-                return new ResponseDto { Data = null, Message = ex.Message, StatusCode = 401 };
+                return new ResponseDto { Data = null, Message = ex.Message, StatusCode = ResponseMessageClass.unsuccessStatusCode };
             }
 
         }
@@ -72,6 +73,7 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return false;
             }
 
@@ -105,11 +107,11 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
                         ZipCode = a.ZipCode,
                     }).ToList()
                 });
-                return new ResponseDto { Data = collection, Message = "", StatusCode = 200 };
+                return new ResponseDto { Data = collection, Message = ResponseMessageClass.emptyMessage, StatusCode = ResponseMessageClass.successStatusCode };
             }
             catch (Exception ex)
             {
-                return new ResponseDto { Data = null, Message = ex.Message, StatusCode = 401 };
+                return new ResponseDto { Data = null, Message = ex.Message, StatusCode = ResponseMessageClass.unsuccessStatusCode };
             }
 
 
@@ -137,9 +139,9 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
                     var userDetails = _context.UserDetailsAnkits.FirstOrDefault(x => x.Email == loginCredential.Email);
                     
                     var token = _tokenGenerationService.GenerateToken(userDetails);
-                    return new ResponseDto { Data =  token, Message = userDetails.FirstName, StatusCode=200 };
+                    return new ResponseDto { Data =  token, Message = userDetails.FirstName, StatusCode=ResponseMessageClass.successStatusCode };
                 }
-                return new ResponseDto { Data = null, Message = "You are not registered user", StatusCode = 401 };
+                return new ResponseDto { Data = null, Message = ResponseMessageClass.invalidUser, StatusCode = ResponseMessageClass.unsuccessStatusCode };
             }
             catch (Exception ex)
             {
@@ -166,11 +168,11 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
                 await _context.Database.ExecuteSqlRawAsync("EXEC UP_UpdatePassword @Id, @password, @message OUTPUT",
                     parameter1, parameter2, messageParameter);
                 var message = messageParameter.Value.ToString();
-                return new ResponseDto { Data = null, Message = message, StatusCode = 200 };
+                return new ResponseDto { Data = null, Message = message, StatusCode = ResponseMessageClass.successStatusCode };
             }
             catch (Exception ex)
             {
-                return new ResponseDto { Data= null, Message = ex.Message,StatusCode = 401 };
+                return new ResponseDto { Data= null, Message = ex.Message,StatusCode = ResponseMessageClass.unsuccessStatusCode };
             }
         }
 
@@ -208,7 +210,7 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
                         }
                         else
                         {
-                            // Add new address
+                            // Add new address 
                             user.UserAddressAnkits.Add(new UserAddressAnkit
                             {
                                 City = addressDto.City,
@@ -221,13 +223,13 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
                     }
 
                     await _context.SaveChangesAsync();
-                    return new ResponseDto { Data = null, Message = "Data updated Successfully", StatusCode = 200 };
+                    return new ResponseDto { Data = null, Message = ResponseMessageClass.updateSuccess, StatusCode = 200 };
                 }
-                return new ResponseDto { Data = null, Message = "Data not found", StatusCode = 404 };
+                return new ResponseDto { Data = null, Message = ResponseMessageClass.notFound, StatusCode = ResponseMessageClass.notFoundStatusCode };
             }
             catch(Exception ex)
             {
-                return new ResponseDto { Data = null, Message = ex.Message, StatusCode = 500 };
+                return new ResponseDto { Data = null, Message = ex.Message, StatusCode = ResponseMessageClass.badRequestStatusCode };
             }
         }
 
@@ -238,9 +240,9 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
                 var encryptPass = EncriptionAndDecription.EncryptData(ChangelogedInDto.OldPassword);
                 var userInDb = await _context.UserDetailsAnkits.Where(u => u.UserId == id).Select(u => new { u.Password }).FirstOrDefaultAsync();
                 if (userInDb == null)
-                    return new ResponseDto { Data = null, Message = "Record not found", StatusCode = 404 };
+                    return new ResponseDto { Data = null, Message = ResponseMessageClass.notFound, StatusCode = 404 };
                 if (userInDb.Password != encryptPass)
-                    return new ResponseDto { Data = null, Message = "Old password is incorrect", StatusCode = 401 };
+                    return new ResponseDto { Data = null, Message = ResponseMessageClass.oldPasswordIncorrect, StatusCode = 401 };
 
                 var messageParameter = new SqlParameter
                 {
@@ -257,12 +259,12 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
                 await _context.Database.ExecuteSqlRawAsync("EXEC UP_UpdatePassword @Id, @password, @message OUTPUT",
                     parameter1, parameter2, messageParameter);
                 var message = messageParameter.Value.ToString();
-                return new ResponseDto { Data = null, Message = message, StatusCode = 200 };
+                return new ResponseDto { Data = null, Message = message, StatusCode = ResponseMessageClass.successStatusCode };
 
             }
             catch(Exception ex)
             {
-                return new ResponseDto { Data = null, Message= ex.Message, StatusCode = 500 };
+                return new ResponseDto { Data = null, Message= ex.Message, StatusCode = ResponseMessageClass.badRequestStatusCode };
             }
         }
 
@@ -312,10 +314,12 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
                         }).ToList()
                     }).ToListAsync();
 
-                return new ResponseDto { Data = dataList, Message = "", StatusCode = 200 };
+                return new ResponseDto { Data = dataList, Message = ResponseMessageClass.emptyMessage,
+                    StatusCode = ResponseMessageClass.successStatusCode };
             } catch(Exception ex)
             {
-                return new ResponseDto { Data = null, Message = ex.Message, StatusCode = 401};
+                return new ResponseDto { Data = null, Message = ex.Message,
+                    StatusCode = ResponseMessageClass.unsuccessStatusCode };
             }
         }
     }

@@ -11,6 +11,15 @@ namespace AssessementProjectForAddingUser.Domain.HelperClass
         //Success Message
         public const string loginSuccess = "Login successfully";
         public const string loginError = "Login unsuccess";
+        public const string addedSuccess = "Data saved successfully";
+        public const string invalidUser = "Your are not a registered user";
+        public const string updateSuccess = "Data updated successfully";
+        public const string notFound = "Data not found";
+        public const string oldPasswordIncorrect = "Your old password is incorrect";
+        public const string emptyMessage = "";
+        public const string emailSuccess = "Email sent successfully";
+        public const string tokenExpired = "Your token is expired please login again";
+        public const string unauthorizeUser = "Unauthorized User";
 
         //unsuccess Message
         public const string somethingWrongError = "Something went wrong";
@@ -19,6 +28,8 @@ namespace AssessementProjectForAddingUser.Domain.HelperClass
         // Status Codes
         public const int successStatusCode = 200;
         public const int unsuccessStatusCode = 401;
+        public const int notFoundStatusCode = 404;
+        public const int badRequestStatusCode = 500;
 
         // store procedure
 

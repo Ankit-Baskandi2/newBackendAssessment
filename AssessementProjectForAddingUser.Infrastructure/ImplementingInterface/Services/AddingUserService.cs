@@ -2,6 +2,7 @@
 using AssessementProjectForAddingUser.Application.Interface.IServices;
 using AssessementProjectForAddingUser.Domain.DTOs;
 using AssessementProjectForAddingUser.Domain.Entity;
+using AssessementProjectForAddingUser.Domain.HelperClass;
 using AssessementProjectForAddingUser.Infrastructure.CustomLogic;
 using Mapster;
 using Microsoft.AspNetCore.Hosting;
@@ -28,26 +29,9 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
         {
             var message = "Use this email and passwod to login";
             var uniquePassword = GeneratePassword.GenerateUniquePassword();
-            var credientailDetails = $@"<html>
-           <head></head>      
-          <body style="" margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;"">
-           <div style=""height:auto;background: linear-gradient(to top, #c9c9ff 50%,#6e6ef6 90%) no-repeat;width:400px;padding:30px;"">
-               <div>
-                      <div>
-                         <h1>Dear ""{userDetailsAnkitDtos.FirstName}""</h2>
-                         <h1>Activate your account</h1>
-                          <hr>
-                          <p>You're Login credentials are below :</p>
-                           <p> Email : {userDetailsAnkitDtos.Email}</p>
-                            <p> Password : {uniquePassword} </p>      
-                           <p>Do not share you details with others</p>
-                      </div>
-               </div>
-           </div>
-         </body>
-         </html>";
+            var credientailDetails = HtmlBodyForSendinEmailCredentails.EmailHtmlWithCredentails(userDetailsAnkitDtos.FirstName, userDetailsAnkitDtos.Email, uniquePassword);
             //var credientailDetails = $"Email : {userDetailsAnkitDtos.Email}, Password :{uniquePassword}";
-            _emailSenderService.SendEmailAsync(userDetailsAnkitDtos.Email, message, credientailDetails);
+            await _emailSenderService.SendEmailAsync(userDetailsAnkitDtos.Email, message, credientailDetails);
 
             var uploadFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploadImages");
 
@@ -82,7 +66,6 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
                 AlternatePhone = EncriptionAndDecription.EncryptData(userDetailsAnkitDtos.AlternatePhone),
                 IsActive = userDetailsAnkitDtos.IsActive,
                 ImagePath = uniqueFileName != null ? "/uploadImages/" + uniqueFileName : null,
-                //ImagePath = "/null",
                 Password = EncriptionAndDecription.EncryptData(uniquePassword),
                 UserAddressAnkits = userDetailsAnkitDtos.UserAddressAnkits.Select(a => new UserAddressAnkit
                 {
@@ -137,14 +120,14 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
                     var subj = "Click link below to change password";
                     var body = $"http://localhost:4200/auth/resetoldpassword/{tokenValue}";
                     await _emailSenderService.SendEmailAsync(email, subj, body);
-                    return new ResponseDto { Data = null, Message = "Email sent successfully", StatusCode = 200 };
+                    return new ResponseDto { Data = null, Message = ResponseMessageClass.emailSuccess, StatusCode = 200 };
                 }
-                return new ResponseDto { Data = null, StatusCode = 401, Message = "You are not registered user" };
+                return new ResponseDto { Data = null, StatusCode = ResponseMessageClass.unsuccessStatusCode, Message = ResponseMessageClass.invalidUser };
 
             }
             catch (Exception ex)
             {
-                return new ResponseDto { Data = null, Message=ex.Message, StatusCode = 500 };
+                return new ResponseDto { Data = null, Message=ex.Message, StatusCode = ResponseMessageClass.badRequestStatusCode };
             }
         }
 
@@ -158,7 +141,7 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
             var id = await _tokenGenerationService.ValidateJwtToken(token);
 
             if (id == -1)
-                return new ResponseDto { Data = null, Message = "Token expired", StatusCode = 401 };
+                return new ResponseDto { Data = null, Message = ResponseMessageClass.tokenExpired, StatusCode = ResponseMessageClass.unsuccessStatusCode };
 
             return await _repository.UpdatePassword(id, password);
         }
@@ -168,7 +151,7 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
             var id = await _tokenGenerationService.ValidateJwtToken(token);
 
             if (id == -1)
-                return new ResponseDto { Data = null, Message = "Token expired", StatusCode = 401 };
+                return new ResponseDto { Data = null, Message = ResponseMessageClass.tokenExpired, StatusCode = ResponseMessageClass.unsuccessStatusCode };
             return await _repository.ChangePasswordWhenUserLogedIn(id, changePassword);
         }
 

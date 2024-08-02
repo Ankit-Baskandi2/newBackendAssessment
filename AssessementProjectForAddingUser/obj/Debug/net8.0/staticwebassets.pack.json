@@ -1,0 +1,33 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\ankit.baskandi\\Desktop\\backendAssessmentProject\\newBackendAssessment\\AssessementProjectForAddingUser\\wwwroot\\uploadImages\\4439a509-3366-4ce9-856e-57aefcb2ccda_emailSend.png",
+      "PackagePath": "staticwebassets\\uploadImages\\4439a509-3366-4ce9-856e-57aefcb2ccda_emailSend.png"
+    },
+    {
+      "Id": "C:\\Users\\ankit.baskandi\\Desktop\\backendAssessmentProject\\newBackendAssessment\\AssessementProjectForAddingUser\\wwwroot\\uploadImages\\7c68d6fb-ee63-4a63-9839-437a4c141a4c_login.png",
+      "PackagePath": "staticwebassets\\uploadImages\\7c68d6fb-ee63-4a63-9839-437a4c141a4c_login.png"
+    },
+    {
+      "Id": "C:\\Users\\ankit.baskandi\\Desktop\\backendAssessmentProject\\newBackendAssessment\\AssessementProjectForAddingUser\\wwwroot\\uploadImages\\a9f76bcf-6c23-411f-8411-c23206b3542a_login.png",
+      "PackagePath": "staticwebassets\\uploadImages\\a9f76bcf-6c23-411f-8411-c23206b3542a_login.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.AssessementProjectForAddingUser.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.AssessementProjectForAddingUser.props",
+      "PackagePath": "build\\AssessementProjectForAddingUser.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.AssessementProjectForAddingUser.props",
+      "PackagePath": "buildMultiTargeting\\AssessementProjectForAddingUser.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.AssessementProjectForAddingUser.props",
+      "PackagePath": "buildTransitive\\AssessementProjectForAddingUser.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
