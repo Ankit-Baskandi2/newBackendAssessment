@@ -16,7 +16,7 @@ namespace AssessementProjectForAddingUser.Domain.HelperClass
                           <hr>
                           <p>You're receiving this mail because your account is not active</p>
                            <p> Please tap the button below to choose a new password.</p>
-                           <a href=""http;//localhost:4200/reset?email={email}&code={emailToken}"" target=""_blank"" style=""background:#0d6efc;
+                           <a href=""http//localhost:4200/reset?email={email}&code={emailToken}"" target=""_blank"" style=""background:#0d6efc;
                                  color:white;border-radius:4px ;display:block;margin:0 auto;width:50%;text-align:ceneter;text-decoration:none"">Activate Account</a>
                            <p>Kind Regards,<br><br>
                               Ankit Baskandi</p>

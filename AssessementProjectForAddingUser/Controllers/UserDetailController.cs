@@ -34,19 +34,19 @@ namespace AssessementProjectForAddingUser.Controllers
             return Ok(await _addingUserService.LoginCredentialChecking(loginCredential));
         }
 
-        [HttpGet("GetUserDetails")]
+        [HttpGet("GetUserDetails"),Authorize]
         public async Task<IActionResult> GetDetails()
         {
             return Ok(await _addingUserService.GetAllUsers());
         }
 
-        [HttpDelete("DeleteUserDetails")]
+        [HttpDelete("DeleteUserDetails"),Authorize]
         public async Task<IActionResult> DeleteDetails(long Id)
         {
             return Ok(await _addingUserService.DeleteUserDetail(Id));
         }
 
-        [HttpPost("SendEmailToForgotPassword/{email}")]
+        [HttpPost("SendEmailToForgotPassword/{email}"),AllowAnonymous]
         public async Task<IActionResult> SendingEmail(string email)
         {  
             return Ok(await _addingUserService.SendEmailToForgotPassword(email));
@@ -65,7 +65,7 @@ namespace AssessementProjectForAddingUser.Controllers
             return Ok(await _addingUserService.ChangeLogedInUserPassword(changePasswordWhenLoged, token));
         }
 
-        [HttpPut("UpdateUserDetail")]
+        [HttpPut("UpdateUserDetail"),Authorize]
         public async Task<IActionResult> UpdateDetails([FromForm] UserDetailsAnkitDtos userDetails)
         {
             return Ok(await _addingUserService.UpdateUserDetail(userDetails));
@@ -84,7 +84,7 @@ namespace AssessementProjectForAddingUser.Controllers
             return Ok(await _addingUserService.ResetForgotedPasswod(password, token));
         }
 
-        [HttpPost("GetDataAccordinToPaginarion")]
+        [HttpPost("GetDataAccordinToPaginarion"),Authorize]
         public async Task<IActionResult> Pagination([FromBody] PaginationDto pagination)
         {
             return Ok(await _addingUserService.PaginationToAccessData(pagination));

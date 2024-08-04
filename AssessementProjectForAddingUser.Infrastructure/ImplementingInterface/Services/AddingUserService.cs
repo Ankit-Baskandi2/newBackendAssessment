@@ -27,10 +27,16 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.S
 
         public async Task<ResponseDto> AddingUserInDb(UserDetailsAnkitDtos userDetailsAnkitDtos)
         {
+            var emailExists = await _repository.EmailIsPresentOrNot(userDetailsAnkitDtos.Email);
+            if(emailExists)
+            {
+                return new ResponseDto { Data = null, Message = "The email already exists", StatusCode = 401 };
+            }
+
             var message = "Use this email and passwod to login";
             var uniquePassword = GeneratePassword.GenerateUniquePassword();
-            var credientailDetails = HtmlBodyForSendinEmailCredentails.EmailHtmlWithCredentails(userDetailsAnkitDtos.FirstName, userDetailsAnkitDtos.Email, uniquePassword);
-            //var credientailDetails = $"Email : {userDetailsAnkitDtos.Email}, Password :{uniquePassword}";
+            //var credientailDetails = HtmlBodyForSendinEmailCredentails.EmailHtmlWithCredentails(userDetailsAnkitDtos.FirstName, userDetailsAnkitDtos.Email, uniquePassword);
+            var credientailDetails = $"Email : {userDetailsAnkitDtos.Email}, Password : {uniquePassword}";
             await _emailSenderService.SendEmailAsync(userDetailsAnkitDtos.Email, message, credientailDetails);
 
             var uploadFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploadImages");
