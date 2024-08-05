@@ -34,7 +34,7 @@ namespace AssessementProjectForAddingUser.Controllers
             return Ok(await _addingUserService.LoginCredentialChecking(loginCredential));
         }
 
-        [HttpGet("GetUserDetails"),Authorize]
+        [HttpGet("GetUserDetails")]
         public async Task<IActionResult> GetDetails()
         {
             return Ok(await _addingUserService.GetAllUsers());
