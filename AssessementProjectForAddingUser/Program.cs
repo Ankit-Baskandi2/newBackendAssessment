@@ -32,8 +32,6 @@ builder.Services.AddControllers()
         Format = "date",
         Example = new OpenApiString(DateTime.Today.ToString("yyyy-MM-dd"))
     })
-
-
 );
 
 builder.Services.AddSwaggerGen(options =>
@@ -47,8 +45,6 @@ builder.Services.AddSwaggerGen(options =>
 
     options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
-
-
 
 
 builder.Services.AddDbContext<TestContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
