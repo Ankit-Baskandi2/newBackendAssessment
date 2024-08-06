@@ -60,7 +60,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", builder =>
     {
-        builder.AllowAnyOrigin()
+        builder.WithOrigins("http://localhost:4200")
         .AllowAnyMethod()
         .AllowAnyHeader();
     });
@@ -100,7 +100,13 @@ app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 
-app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    OnPrepareResponse = ctx =>
+    {
+        ctx.Context.Response.Headers.Append("Access-Control-Allow-Origin", "http://localhost:4200");
+    }
+});
 
 app.UseAuthentication();
 

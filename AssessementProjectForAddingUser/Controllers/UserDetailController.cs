@@ -1,8 +1,8 @@
 ﻿using AssessementProjectForAddingUser.Application.Interface.IServices;
 using AssessementProjectForAddingUser.Domain.DTOs;
 using AssessementProjectForAddingUser.Domain.HelperClass;
-using AssessementProjectForAddingUser.Infrastructure.CustomLogic;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -21,7 +21,7 @@ namespace AssessementProjectForAddingUser.Controllers
             _config = config;
         }
 
-        [HttpPost("SaveUserDetail")]
+        [HttpPost("SaveUserDetail"),Authorize]
         public async Task<IActionResult> SaveDetail([FromForm] UserDetailsAnkitDtos userDetailsAnkitDtos)
         {
             return Ok(await _addingUserService.AddingUserInDb(userDetailsAnkitDtos));
@@ -66,6 +66,7 @@ namespace AssessementProjectForAddingUser.Controllers
         }
 
         [HttpPut("UpdateUserDetail"),Authorize]
+        [EnableCors("AllowAll")]
         public async Task<IActionResult> UpdateDetails([FromForm] UserDetailsAnkitDtos userDetails)
         {
             return Ok(await _addingUserService.UpdateUserDetail(userDetails));

@@ -1,5 +1,4 @@
-﻿using AssessementProjectForAddingUser.Domain.DTOs;
-using AssessementProjectForAddingUser.Domain.Entity;
+﻿using AssessementProjectForAddingUser.Domain.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -20,19 +19,10 @@ namespace AssessementProjectForAddingUser.Infrastructure.CustomLogic
 
         public string GenerateToken(UserDetailsAnkit userDetail)
         {
-            //var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:key"]));
-            //var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-            //var token = new JwtSecurityToken(_config["Jwt:Issuer"], _config["Jwt:Audience"], null,
-            //    expires: DateTime.Now.AddMinutes(5),
-            //    signingCredentials: credentials);
-            //return new JwtSecurityTokenHandler().WriteToken(token);
-
             var claims = new[]
             {
                     new Claim(JwtRegisteredClaimNames.Sub, _config["Jwt:Subject"]),
                     new Claim(JwtRegisteredClaimNames.Jti , Guid.NewGuid().ToString()),
-                    //new Claim("Id", user.Id.ToString()),
                     new Claim("Id", userDetail.UserId.ToString()),
                     new Claim("Email", userDetail.Email.ToString())
             };

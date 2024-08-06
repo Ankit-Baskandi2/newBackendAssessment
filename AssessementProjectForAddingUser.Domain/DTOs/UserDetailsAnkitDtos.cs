@@ -1,7 +1,6 @@
 ﻿using AssessementProjectForAddingUser.Domain.Entity;
 using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace AssessementProjectForAddingUser.Domain.DTOs
 {
@@ -35,7 +34,7 @@ namespace AssessementProjectForAddingUser.Domain.DTOs
 
         public IFormFile ImagePath { get; set; }
 
-        public bool? IsActive { get; set; } = false;
+        public bool? IsActive { get; set; } = true;
 
         public virtual ICollection<UserAddressAnkit> UserAddressAnkits { get; set; } = new List<UserAddressAnkit>();
     }

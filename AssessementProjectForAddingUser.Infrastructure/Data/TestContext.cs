@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using AssessementProjectForAddingUser.Domain.Entity;
+﻿using AssessementProjectForAddingUser.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace AssessementProjectForAddingUser.Infrastructure.Data;

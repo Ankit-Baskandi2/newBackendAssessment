@@ -4,7 +4,6 @@ using AssessementProjectForAddingUser.Domain.DTOs;
 using AssessementProjectForAddingUser.Domain.Entity;
 using AssessementProjectForAddingUser.Domain.HelperClass;
 using AssessementProjectForAddingUser.Infrastructure.CustomLogic;
-using Mapster;
 using Microsoft.AspNetCore.Hosting;
 
 namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.Services
