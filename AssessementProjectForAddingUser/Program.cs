@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,7 @@ builder.Services.AddControllers()
 
     });
     builder.Services.AddEndpointsApiExplorer();
+
     builder.Services.AddSwaggerGen(opt =>
     opt.MapType<DateOnly>(() => new OpenApiSchema
     {
@@ -30,7 +32,24 @@ builder.Services.AddControllers()
         Format = "date",
         Example = new OpenApiString(DateTime.Today.ToString("yyyy-MM-dd"))
     })
+
+
 );
+
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey
+    });
+
+    options.OperationFilter<SecurityRequirementsOperationFilter>();
+});
+
+
+
 
 builder.Services.AddDbContext<TestContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 

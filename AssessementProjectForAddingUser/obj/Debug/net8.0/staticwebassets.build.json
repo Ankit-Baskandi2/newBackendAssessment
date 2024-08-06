@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "BnIAn0wtSsMpONJZ5dmwuTINO6FcvhS+mutbXH+mYA4=",
+  "Hash": "I60LlVohEi7342+sVmwImuCvRiB9He2DhIvKjDE7VK4=",
   "Source": "AssessementProjectForAddingUser",
   "BasePath": "_content/AssessementProjectForAddingUser",
   "Mode": "Default",
@@ -16,6 +16,25 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\ankit.baskandi\\Desktop\\backendAssessmentProject\\newBackendAssessment\\AssessementProjectForAddingUser\\wwwroot\\uploadImages\\0cc7de8e-c64f-4d43-b443-fb402686489f_Rectangle 767.jpg",
+      "SourceId": "AssessementProjectForAddingUser",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ankit.baskandi\\Desktop\\backendAssessmentProject\\newBackendAssessment\\AssessementProjectForAddingUser\\wwwroot\\",
+      "BasePath": "_content/AssessementProjectForAddingUser",
+      "RelativePath": "uploadImages/0cc7de8e-c64f-4d43-b443-fb402686489f_Rectangle 767.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploadImages\\0cc7de8e-c64f-4d43-b443-fb402686489f_Rectangle 767.jpg"
+    },
     {
       "Identity": "C:\\Users\\ankit.baskandi\\Desktop\\backendAssessmentProject\\newBackendAssessment\\AssessementProjectForAddingUser\\wwwroot\\uploadImages\\3ef05b76-20c7-46d7-a86b-6b6d73229603_random.jpg",
       "SourceId": "AssessementProjectForAddingUser",

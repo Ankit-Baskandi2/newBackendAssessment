@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\ankit.baskandi\\Desktop\\backendAssessmentProject\\newBackendAssessment\\AssessementProjectForAddingUser\\wwwroot\\uploadImages\\0cc7de8e-c64f-4d43-b443-fb402686489f_Rectangle 767.jpg",
+      "PackagePath": "staticwebassets\\uploadImages\\0cc7de8e-c64f-4d43-b443-fb402686489f_Rectangle 767.jpg"
+    },
+    {
       "Id": "C:\\Users\\ankit.baskandi\\Desktop\\backendAssessmentProject\\newBackendAssessment\\AssessementProjectForAddingUser\\wwwroot\\uploadImages\\3ef05b76-20c7-46d7-a86b-6b6d73229603_random.jpg",
       "PackagePath": "staticwebassets\\uploadImages\\3ef05b76-20c7-46d7-a86b-6b6d73229603_random.jpg"
     },

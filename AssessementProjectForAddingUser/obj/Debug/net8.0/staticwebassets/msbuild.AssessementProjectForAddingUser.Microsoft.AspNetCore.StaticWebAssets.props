@@ -1,5 +1,21 @@
 ﻿<Project>
   <ItemGroup>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploadImages\0cc7de8e-c64f-4d43-b443-fb402686489f_Rectangle 767.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>AssessementProjectForAddingUser</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/AssessementProjectForAddingUser</BasePath>
+      <RelativePath>uploadImages/0cc7de8e-c64f-4d43-b443-fb402686489f_Rectangle 767.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploadImages\0cc7de8e-c64f-4d43-b443-fb402686489f_Rectangle 767.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploadImages\3ef05b76-20c7-46d7-a86b-6b6d73229603_random.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>AssessementProjectForAddingUser</SourceId>
