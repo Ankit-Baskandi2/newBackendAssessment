@@ -53,6 +53,7 @@ builder.Services.AddTransient<IAddingUserDetailRepository, AddingUserDetailRepos
 builder.Services.AddTransient<IAddingUserService, AddingUserService>();
 builder.Services.AddTransient<IEmailSenderService, EmailSenderService>();
 
+
 builder.Services.AddScoped<TokenGenerationService>();
 
 //Adding Cores

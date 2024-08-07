@@ -35,7 +35,6 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
             {
                 return new ResponseDto { Data = null, Message = ex.Message, StatusCode = ResponseMessageClass.unsuccessStatusCode };
             }
-
         }
 
         public async Task<ResponseDto> DeleteUserDetail(long id)
@@ -76,7 +75,6 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
                 Console.WriteLine(ex.Message);
                 return false;
             }
-
         }
 
         public async Task<ResponseDto> GetAllUsers()
@@ -107,14 +105,12 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
                         ZipCode = a.ZipCode,
                     }).ToList()
                 });
-                return new ResponseDto { Data = collection, Message = ResponseMessageClass.emptyMessage, StatusCode = ResponseMessageClass.successStatusCode };
+                return new ResponseDto { Data = collection, Message = ResponseMessageClass.getdetailMessage, StatusCode = ResponseMessageClass.successStatusCode };
             }
             catch (Exception ex)
             {
                 return new ResponseDto { Data = null, Message = ex.Message, StatusCode = ResponseMessageClass.unsuccessStatusCode };
             }
-
-
         }
 
         public async Task<UserDetailsAnkit> GetUserByEmail(string email)
@@ -191,8 +187,8 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
                     user.Phone = EncriptionAndDecription.EncryptData(userDetailsAnkitDto.Phone);
                     user.AlternatePhone = EncriptionAndDecription.EncryptData(userDetailsAnkitDto.AlternatePhone);
                     user.DateOfjoining = userDetailsAnkitDto?.DateOfjoining;
-                    user.Dob = userDetailsAnkitDto.Dob;
-                    user.Gender = userDetailsAnkitDto.Gender;
+                    user.Dob = userDetailsAnkitDto?.Dob;
+                    user.Gender = userDetailsAnkitDto?.Gender;
                     user.Email = EncriptionAndDecription.EncryptData(userDetailsAnkitDto.Email);
                     user.IsActive = userDetailsAnkitDto.IsActive;
 
@@ -270,7 +266,6 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
 
         public async Task<ResponseDto> GetDataThroughPagination(PaginationDto pagination)
         {
-
             try
             {
                 var query = _context.UserDetailsAnkits.Include(u => u.UserAddressAnkits).AsQueryable();
@@ -287,7 +282,6 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
                 {
                     query = query.Where(x => x.Phone.Contains(EncriptionAndDecription.EncryptData(pagination.ContactNo)));
                 }
-
 
                 var dataList = await query.Skip((pagination.PageNumber - 1) * pagination.PageSize).Take(pagination.PageSize).
                     Select(user => new UserDetailsAnkit
@@ -314,7 +308,7 @@ namespace AssessementProjectForAddingUser.Infrastructure.ImplementingInterface.R
                         }).ToList()
                     }).ToListAsync();
 
-                return new ResponseDto { Data = dataList, Message = ResponseMessageClass.emptyMessage,
+                return new ResponseDto { Data = dataList, Message = ResponseMessageClass.getdetailMessage,
                     StatusCode = ResponseMessageClass.successStatusCode };
             } catch(Exception ex)
             {

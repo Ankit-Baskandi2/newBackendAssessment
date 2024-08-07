@@ -16,14 +16,13 @@ namespace AssessementProjectForAddingUser.Domain.HelperClass
         public const string updateSuccess = "Data updated successfully";
         public const string notFound = "Data not found";
         public const string oldPasswordIncorrect = "Your old password is incorrect";
-        public const string emptyMessage = "";
         public const string emailSuccess = "Email sent successfully";
         public const string tokenExpired = "Your token is expired please login again";
         public const string unauthorizeUser = "Unauthorized User";
+        public const string getdetailMessage = "Success";
 
         //unsuccess Message
         public const string somethingWrongError = "Something went wrong";
-
 
         // Status Codes
         public const int successStatusCode = 200;
